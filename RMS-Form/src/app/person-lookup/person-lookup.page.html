@@ -1,9 +1,33 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>person-lookup</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<ion-grid>
+  <ion-row>
+    <img
+      src="assets/policeLogo.jpg"
+      alt="logo"
+      width="12%"
+      height="12%"
+      [routerLink]="'/home'"
+    />
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Title</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ion-row>
+  <ion-row>
+    <ion-card>
+      <ion-item href="#" class="ion-activated">
+        <ion-icon name="person-add-outline"></ion-icon>
+        <ion-label>Create new Person</ion-label>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item href="#" class="ion-activated">
+        <ion-icon name="people-outline"></ion-icon>
+        <ion-label>Update Person</ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-row>
+  <ion-row>
+    <ion-searchbar showCancelButton="focus"></ion-searchbar>
+  </ion-row>
+</ion-grid>
