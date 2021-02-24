@@ -6,52 +6,154 @@
       </ion-card-header>
     </ion-card>
   </ion-row>
+
+  <!-- Title for page -->
   <ion-row>
     <ion-card>
-      <ion-item href="#" class="ion-activated">
-        <ion-icon name="person-outline"></ion-icon>
-        <ion-label>Sign In</ion-label>
-      </ion-item>
-
-      <ion-input></ion-input>
-
-      <!-- Input with value -->
-      <ion-input value="custom"></ion-input>
-
-      <!-- Input with placeholder -->
-      <ion-input placeholder="Enter Input"></ion-input>
-
-      <!-- Input with clear button when there is a value -->
-      <ion-input clearInput value="clear me"></ion-input>
-
-      <!-- Number type input -->
-      <ion-input type="number" value="333"></ion-input>
-
-      <!-- Disabled input -->
-      <ion-input value="Disabled" disabled></ion-input>
-
-      <!-- Readonly input -->
-      <ion-input value="Readonly" readonly></ion-input>
-
-      <!-- Inputs with labels -->
+      <ion-card-header>
+        <ion-card-title>Incident Report Form</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ion-row>
+  <!-- Form -->
+  <ion-row>
+    <ion-card>
       <ion-item>
-        <ion-label>Default Label</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
+        <form [formGroup]="incidentForm">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">I.R #</ion-label>
+                <ion-input placeholder="xxxx"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Occurrence Date</ion-label>
+                <ion-input placeholder="xx/xx/xxxx"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Occurrence Times</ion-label>
+                <ion-input placeholder="xx/xx/xxxx"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-      <ion-item>
-        <ion-label position="floating">Floating Label</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Incident Type</ion-label>
+                <ion-input> </ion-input>
+                <ion-select interface="popover">
+                  <ion-select-option value=""></ion-select-option>
+                  <ion-select-option value=""></ion-select-option>
+                  <ion-select-option value=""></ion-select-option>
+                  <ion-select-option value=""></ion-select-option>
+                  <ion-select-option value=""></ion-select-option>
+                  <ion-select-option value=""></ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Location</ion-label>
+                <ion-input placeholder="11111 n 1st ln, city"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Location Name</ion-label>
+                <ion-input placeholder="Name"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Officer Name</ion-label>
+                <ion-input placeholder="Last, First"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Officer Serial #</ion-label>
+                <ion-input placeholder="xxxxx"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">DV Domestic Violence</ion-label>
+                <ion-input placeholder="*Opt"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-item>
+              <ion-label position="stacked">
+                Narrative Section *Freeform
+              </ion-label>
+              <ion-textarea placeholder="placeholder"></ion-textarea>
+            </ion-item>
+          </ion-row>
 
-      <ion-item>
-        <ion-label position="fixed">Fixed Label</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
+          <!-- add more forms -->
+          <ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-card button (onclick)="incidentAdd == true">
+                  <ion-button
+                    (click)="enableForm()"
+                    expand="block"
+                    fill="clear"
+                    shape="round"
+                  >
+                    Click me
+                  </ion-button>
+                  <ion-item>
+                    <ion-icon name="person-add-outline" slot="start"></ion-icon>
+                    <ion-label>Create a Persons Report</ion-label>
+                  </ion-item>
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <ion-card button (onclick)="greed($event)" class="personAdd">
+                  <ion-item>
+                    <ion-icon name="person-add-outline" slot="start"></ion-icon>
+                    <ion-label>Create a Persons Report</ion-label>
+                  </ion-item>
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <ion-card button (onclick)="greed($event)" class="vehicleAdd">
+                  <ion-item>
+                    <ion-icon name="person-add-outline" slot="start"></ion-icon>
+                    <ion-label>Create a Persons Report</ion-label>
+                  </ion-item>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-row>
 
-      <ion-item>
-        <ion-label position="stacked">Stacked Label</ion-label>
-        <ion-input></ion-input>
+          <!-- templates -->
+          <ion-row>
+            <div *ngIf="incidentAdd; then add"></div>
+            <ng-template #add>
+              <ion-item>
+                <ion-label position="stacked">Officer Serial #</ion-label>
+                <ion-input placeholder="xxxxx"></ion-input>
+              </ion-item>
+            </ng-template>
+          </ion-row>
+
+          <!-- Submit button -->
+          <ion-row>
+            <ion-button expand="block" (submit)="submitForm()"
+              >Submit</ion-button
+            >
+          </ion-row>
+        </form>
       </ion-item>
     </ion-card>
   </ion-row>
