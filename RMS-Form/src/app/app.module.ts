@@ -23,7 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    AngularFireAuthModule,
+    AngularFireAuthModule
   ],
   providers: [
     AuthService,
