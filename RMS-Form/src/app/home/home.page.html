@@ -16,16 +16,21 @@
   </ion-row>
 
   <!-- That is going to be displayed -->
-  <div *ngIf="signedin; then auth; else login"></div>
+  <div *ngIf="auth.user$ | async; then auth; else login"></div>
 
   <!-- Templates -->
   <ng-template #login>
     <ion-row>
       <ion-card>
-        <ion-item href="" class="ion-activated">
+        <!-- <ion-item href="" class="ion-activated">
           <ion-icon name="person-outline"></ion-icon>
           <ion-label>Sign In</ion-label>
-        </ion-item>
+          
+        </ion-item> -->
+        <ion-button (click)="signIn">
+          <ion-icon slot="start" name="person-outline"></ion-icon>
+          Sign In
+        </ion-button>
       </ion-card>
     </ion-row>
   </ng-template>

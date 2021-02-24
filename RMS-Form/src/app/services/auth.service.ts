@@ -5,8 +5,11 @@ import { from, Observable, of } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 // Firebase
-import auth from 'firebase/app';
-import firebase from 'firebase/app';
+// import { auth } from 'firebase/app';
+// import { firebase } from 'firebase/app';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
   AngularFirestore,
@@ -106,7 +109,6 @@ export class AuthService {
       provider
     );
     return this.updateUserData(credential);
-    // window.location.reload();
   }
 
   private updateUserData(credential: auth.auth.UserCredential) {
