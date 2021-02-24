@@ -1,8 +1,11 @@
 export interface User {
   displayName: string;
-  perfersDark: boolean;
   email: string;
   uid: string;
+  perfersDark?: boolean;
+  isUser?: boolean;
+  isAdmin?: boolean;
+  isDeleted?: boolean;
 }
 
 export interface UserClaims {
