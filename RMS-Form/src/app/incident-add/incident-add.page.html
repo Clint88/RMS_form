@@ -19,24 +19,30 @@
   <ion-row>
     <ion-card>
       <ion-item>
-        <form [formGroup]="incidentForm">
+        <form [formGroup]="incidentForm" (submit)="submitForm()">
           <ion-row>
             <ion-col>
               <ion-item>
                 <ion-label position="stacked">I.R #</ion-label>
-                <ion-input placeholder="xxxx"></ion-input>
+                <ion-input placeholder="xxxx" formControlName="iR"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col>
               <ion-item>
                 <ion-label position="stacked">Occurrence Date</ion-label>
-                <ion-input placeholder="xx/xx/xxxx"></ion-input>
+                <ion-input
+                  placeholder="xx/xx/xxxx"
+                  formControlName="occurrenceDate"
+                ></ion-input>
               </ion-item>
             </ion-col>
             <ion-col>
               <ion-item>
                 <ion-label position="stacked">Occurrence Times</ion-label>
-                <ion-input placeholder="xx/xx/xxxx"></ion-input>
+                <ion-input
+                  placeholder="xx/xx/xxxx"
+                  formControlName="occurrenceTime"
+                ></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -45,8 +51,8 @@
             <ion-col>
               <ion-item>
                 <ion-label>Incident Type</ion-label>
-                <ion-input> </ion-input>
-                <ion-select interface="popover">
+                <!-- <ion-input> </ion-input> -->
+                <ion-select interface="popover" formControlName="incidentType">
                   <ion-select-option value=""></ion-select-option>
                   <ion-select-option value=""></ion-select-option>
                   <ion-select-option value=""></ion-select-option>
@@ -59,13 +65,19 @@
             <ion-col>
               <ion-item>
                 <ion-label position="stacked">Location</ion-label>
-                <ion-input placeholder="11111 n 1st ln, city"></ion-input>
+                <ion-input
+                  placeholder="11111 n 1st ln, city"
+                  formControlName="location"
+                ></ion-input>
               </ion-item>
             </ion-col>
             <ion-col>
               <ion-item>
                 <ion-label position="stacked">Location Name</ion-label>
-                <ion-input placeholder="Name"></ion-input>
+                <ion-input
+                  placeholder="Name"
+                  formControlName="locationName"
+                ></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -73,19 +85,28 @@
             <ion-col>
               <ion-item>
                 <ion-label position="stacked">Officer Name</ion-label>
-                <ion-input placeholder="Last, First"></ion-input>
+                <ion-input
+                  placeholder="Last, First"
+                  formControlName="officerName"
+                ></ion-input>
               </ion-item>
             </ion-col>
             <ion-col>
               <ion-item>
                 <ion-label position="stacked">Officer Serial #</ion-label>
-                <ion-input placeholder="xxxxx"></ion-input>
+                <ion-input
+                  placeholder="xxxxx"
+                  formControlName="officerSerial"
+                ></ion-input>
               </ion-item>
             </ion-col>
             <ion-col>
               <ion-item>
                 <ion-label position="stacked">DV Domestic Violence</ion-label>
-                <ion-input placeholder="*Opt"></ion-input>
+                <ion-input
+                  placeholder="*Opt"
+                  formControlName="domViolence"
+                ></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -94,23 +115,31 @@
               <ion-label position="stacked">
                 Narrative Section *Freeform
               </ion-label>
-              <ion-textarea placeholder="placeholder"></ion-textarea>
+              <ion-textarea
+                placeholder="placeholder"
+                formControlName="narrativeSec"
+              ></ion-textarea>
             </ion-item>
           </ion-row>
+
+          <!-- templates -->
+
+          <!-- Add extra incident -->
+          <div *ngIf="incidentAdd; then add"></div>
 
           <!-- add more forms -->
           <ion-row>
             <ion-row>
               <ion-col>
-                <ion-card button (onclick)="incidentAdd == true">
-                  <ion-button
-                    (click)="enableForm()"
-                    expand="block"
-                    fill="clear"
-                    shape="round"
-                  >
-                    Click me
-                  </ion-button>
+                <ion-card button (click)="incidentAdd = true">
+                  <ion-item>
+                    <ion-icon name="person-add-outline" slot="start"></ion-icon>
+                    <ion-label>Add an Incident Report</ion-label>
+                  </ion-item>
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <ion-card button (click)="vehicleAdd = true">
                   <ion-item>
                     <ion-icon name="person-add-outline" slot="start"></ion-icon>
                     <ion-label>Create a Persons Report</ion-label>
@@ -118,43 +147,124 @@
                 </ion-card>
               </ion-col>
               <ion-col>
-                <ion-card button (onclick)="greed($event)" class="personAdd">
+                <ion-card button (click)="personAdd = true">
                   <ion-item>
                     <ion-icon name="person-add-outline" slot="start"></ion-icon>
-                    <ion-label>Create a Persons Report</ion-label>
-                  </ion-item>
-                </ion-card>
-              </ion-col>
-              <ion-col>
-                <ion-card button (onclick)="greed($event)" class="vehicleAdd">
-                  <ion-item>
-                    <ion-icon name="person-add-outline" slot="start"></ion-icon>
-                    <ion-label>Create a Persons Report</ion-label>
+                    <ion-label>Create a Vehicle Report</ion-label>
                   </ion-item>
                 </ion-card>
               </ion-col>
             </ion-row>
           </ion-row>
 
-          <!-- templates -->
-          <ion-row>
-            <div *ngIf="incidentAdd; then add"></div>
-            <ng-template #add>
-              <ion-item>
-                <ion-label position="stacked">Officer Serial #</ion-label>
-                <ion-input placeholder="xxxxx"></ion-input>
-              </ion-item>
-            </ng-template>
-          </ion-row>
-
           <!-- Submit button -->
           <ion-row>
-            <ion-button expand="block" (submit)="submitForm()"
-              >Submit</ion-button
-            >
+            <ion-button expand="block">Submit</ion-button>
           </ion-row>
         </form>
       </ion-item>
     </ion-card>
   </ion-row>
 </ion-grid>
+
+<!-- Incident Add form -->
+<ng-template #add>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">I.R #</ion-label>
+        <ion-input placeholder="xxxx" formControlName="iR"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Occurrence Date</ion-label>
+        <ion-input
+          placeholder="xx/xx/xxxx"
+          formControlName="occurrenceDate"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Occurrence Times</ion-label>
+        <ion-input
+          placeholder="xx/xx/xxxx"
+          formControlName="occurrenceTime"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>Incident Type</ion-label>
+        <!-- <ion-input> </ion-input> -->
+        <ion-select interface="popover" formControlName="incidentType">
+          <ion-select-option value=""></ion-select-option>
+          <ion-select-option value=""></ion-select-option>
+          <ion-select-option value=""></ion-select-option>
+          <ion-select-option value=""></ion-select-option>
+          <ion-select-option value=""></ion-select-option>
+          <ion-select-option value=""></ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Location</ion-label>
+        <ion-input
+          placeholder="11111 n 1st ln, city"
+          formControlName="location"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Location Name</ion-label>
+        <ion-input
+          placeholder="Name"
+          formControlName="locationName"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Officer Name</ion-label>
+        <ion-input
+          placeholder="Last, First"
+          formControlName="officerName"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Officer Serial #</ion-label>
+        <ion-input
+          placeholder="xxxxx"
+          formControlName="officerSerial"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">DV Domestic Violence</ion-label>
+        <ion-input placeholder="*Opt" formControlName="domViolence"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-item>
+      <ion-label position="stacked">
+        Narrative Section *Freeform
+      </ion-label>
+      <ion-textarea
+        placeholder="placeholder"
+        formControlName="narrativeSec"
+      ></ion-textarea>
+    </ion-item>
+  </ion-row>
+</ng-template>
