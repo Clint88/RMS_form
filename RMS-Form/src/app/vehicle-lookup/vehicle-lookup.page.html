@@ -1,33 +1,46 @@
-<ion-grid>
-  <ion-row>
-    <img
-      src="assets/policeLogo.jpg"
-      alt="logo"
-      width="12%"
-      height="12%"
-      [routerLink]="'/home'"
-    />
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Title</ion-card-title>
-      </ion-card-header>
-    </ion-card>
-  </ion-row>
-  <ion-row>
-    <ion-card>
-      <ion-item href="#" class="ion-activated">
-        <ion-icon name="add-outline"></ion-icon>
-        <ion-label>Create new Vehicle</ion-label>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item href="#" class="ion-activated">
-        <ion-icon name="add-outline"></ion-icon>
-        <ion-label>Update Vehicle</ion-label>
-      </ion-item>
-    </ion-card>
-  </ion-row>
-  <ion-row>
-    <ion-searchbar showCancelButton="focus"></ion-searchbar>
-  </ion-row>
-</ion-grid>
+<ion-content class="ion-padding">
+  <ion-grid>
+    <!-- Logo and the title -->
+    <ion-row class="ion-justify-content-center">
+      <img
+        src="assets/policeLogo.jpg"
+        alt="logo"
+        width="9%"
+        height="9%"
+        [routerLink]="'/home'"
+      />
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-text>
+        <ion-card-header>
+          <ion-card-title>Vehicle</ion-card-title>
+        </ion-card-header>
+      </ion-text>
+    </ion-row>
+
+    <!-- add or update buttons -->
+    <ion-row class="ion-justify-content-center">
+      <ion-card>
+        <ion-row>
+          <ion-card>
+            <ion-item href="#" class="ion-activated">
+              <ion-icon name="add-outline"></ion-icon>
+              <ion-label>Create new Vehicle</ion-label>
+            </ion-item>
+          </ion-card>
+          <ion-card>
+            <ion-item href="#" class="ion-activated">
+              <ion-icon name="add-outline"></ion-icon>
+              <ion-label>Update Vehicle</ion-label>
+            </ion-item>
+          </ion-card>
+        </ion-row>
+
+        <!-- Searchbar -->
+        <ion-row class="ion-justify-content-center">
+          <ion-searchbar showCancelButton="focus"></ion-searchbar>
+        </ion-row>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>
