@@ -1,0 +1,353 @@
+<ion-content class="ion-padding">
+  <ion-grid>
+    <!-- Logo and the title -->
+    <ion-row class="ion-justify-content-center">
+      <img
+        src="assets/policeLogo.jpg"
+        alt="logo"
+        width="9%"
+        height="9%"
+        [routerLink]="'/home'"
+      />
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-text>
+        <ion-card-header>
+          <ion-card-title>Title</ion-card-title>
+        </ion-card-header>
+      </ion-text>
+    </ion-row>
+    <!-- Title for page -->
+    <ion-row class="ion-justify-content-center">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Incident Report Form</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-row>
+    <!-- Form -->
+    <ion-row class="ion-justify-content-center">
+      <ion-card>
+        <ion-item>
+          <form [formGroup]="incidentForm" (submit)="submitForm()">
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">I.R #</ion-label>
+                  <ion-input
+                    placeholder="xxxx"
+                    formControlName="iR"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Occurrence Date</ion-label>
+                  <ion-input
+                    placeholder="xx/xx/xxxx"
+                    formControlName="occurrenceDate"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Occurrence Times</ion-label>
+                  <ion-input
+                    placeholder="xx/xx/xxxx"
+                    formControlName="occurrenceTime"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-input *ngIf="robbery">Test</ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Incident Type</ion-label>
+
+                  <ion-select
+                    interface="popover"
+                    formControlName="incidentType"
+                  >
+                    <ion-select-option value="robbery"
+                      >Robbery (armed)</ion-select-option
+                    >
+                    <ion-select-option value="robbery"
+                      >Robbery (unarmed)</ion-select-option
+                    >
+                    <ion-select-option value="threat">Threat</ion-select-option>
+                    <ion-select-option value="drugs">Drugs</ion-select-option>
+                    <ion-select-option value="assult">Assult</ion-select-option>
+                    <ion-select-option value="weaponsViolations">
+                      Weapons Violations
+                    </ion-select-option>
+                    <ion-select-option value="Rape">Rape</ion-select-option>
+                    <ion-select-option value="Fraud">Fraud</ion-select-option>
+                    <ion-select-option value="drunkDriver"
+                      >Drunk Driver</ion-select-option
+                    >
+                    <ion-select-option value="subjectDisturbing">
+                      Subject Disturbing
+                    </ion-select-option>
+                    <ion-select-option value="criminal Damage">
+                      Criminal Damage
+                    </ion-select-option>
+                    <ion-select-option value="violationCO">
+                      Violation of Court Order
+                    </ion-select-option>
+                    <ion-select-option value="Trespassing"
+                      >Trespassing</ion-select-option
+                    >
+                    <ion-select-option value="Homicide"
+                      >Homicide</ion-select-option
+                    >
+                    <ion-select-option value="Burglary"
+                      >Burglary</ion-select-option
+                    >
+                    <ion-select-option value="Theft">Theft</ion-select-option>
+                    <ion-select-option value="Missing Person">
+                      Missing Person
+                    </ion-select-option>
+                    <ion-select-option value="suspicious">
+                      Suspicious person/activity
+                    </ion-select-option>
+                    <ion-select-option value="deadBody"
+                      >Dead Body</ion-select-option
+                    >
+                    <ion-select-option value="insanePerson">
+                      Insane person
+                    </ion-select-option>
+                    <ion-select-option value="Collision"
+                      >Collision</ion-select-option
+                    >
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Location</ion-label>
+                  <ion-input
+                    placeholder="11111 n 1st ln, city"
+                    formControlName="location"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Location Name</ion-label>
+                  <ion-input
+                    placeholder="Name"
+                    formControlName="locationName"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Officer Name</ion-label>
+                  <ion-input
+                    placeholder="Last, First"
+                    formControlName="officerName"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Officer Serial #</ion-label>
+                  <ion-input
+                    placeholder="xxxxx"
+                    formControlName="officerSerial"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">DV Domestic Violence</ion-label>
+                  <ion-input
+                    placeholder="*Opt"
+                    formControlName="domViolence"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-item>
+                <ion-label position="stacked">
+                  Narrative Section *Freeform
+                </ion-label>
+                <ion-textarea
+                  placeholder="placeholder"
+                  formControlName="narrativeSec"
+                ></ion-textarea>
+              </ion-item>
+            </ion-row>
+
+            <!-- templates -->
+
+            <!-- Add extra incident -->
+            <div *ngIf="incidentAdd; then add"></div>
+
+            <!-- add more forms -->
+            <ion-row>
+              <ion-row>
+                <!-- <ion-col>
+                  <ion-card button (click)="incidentAdd = true">
+                    <ion-item>
+                      <ion-icon
+                        name="person-add-outline"
+                        slot="start"
+                      ></ion-icon>
+                      <ion-label>Add an Incident Report</ion-label>
+                    </ion-item>
+                  </ion-card>
+                </ion-col> -->
+                <ion-col>
+                  <ion-card button (click)="vehicleAdd = true">
+                    <ion-item>
+                      <ion-icon
+                        name="person-add-outline"
+                        slot="start"
+                      ></ion-icon>
+                      <ion-label>Create a Persons Report</ion-label>
+                    </ion-item>
+                  </ion-card>
+                </ion-col>
+                <ion-col>
+                  <ion-card button (click)="personAdd = true">
+                    <ion-item>
+                      <ion-icon
+                        name="person-add-outline"
+                        slot="start"
+                      ></ion-icon>
+                      <ion-label>Create a Vehicle Report</ion-label>
+                    </ion-item>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-row>
+
+            <!-- Submit button -->
+            <ion-row>
+              <ion-button expand="block">Submit</ion-button>
+            </ion-row>
+          </form>
+        </ion-item>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!-- Incident Add form -->
+<ng-template #add>
+  <ion-row class="ion-justify-content-end">
+    <ion-card button (click)="incidentAdd = true">
+      <ion-item>
+        <ion-icon name="trash-outline" slot="start"></ion-icon>
+        <ion-label>Remove added Incident</ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">I.R #</ion-label>
+        <ion-input placeholder="xxxx" formControlName="iR"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Occurrence Date</ion-label>
+        <ion-input
+          placeholder="xx/xx/xxxx"
+          formControlName="occurrenceDate"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Occurrence Times</ion-label>
+        <ion-input
+          placeholder="xx/xx/xxxx"
+          formControlName="occurrenceTime"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>Incident Type</ion-label>
+        <!-- <ion-input> </ion-input> -->
+        <ion-select interface="popover" formControlName="incidentType">
+          <ion-select-option value=""></ion-select-option>
+          <ion-select-option value=""></ion-select-option>
+          <ion-select-option value=""></ion-select-option>
+          <ion-select-option value=""></ion-select-option>
+          <ion-select-option value=""></ion-select-option>
+          <ion-select-option value=""></ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Location</ion-label>
+        <ion-input
+          placeholder="11111 n 1st ln, city"
+          formControlName="location"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Location Name</ion-label>
+        <ion-input
+          placeholder="Name"
+          formControlName="locationName"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Officer Name</ion-label>
+        <ion-input
+          placeholder="Last, First"
+          formControlName="officerName"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">Officer Serial #</ion-label>
+        <ion-input
+          placeholder="xxxxx"
+          formControlName="officerSerial"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="stacked">DV Domestic Violence</ion-label>
+        <ion-input placeholder="*Opt" formControlName="domViolence"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-item>
+      <ion-label position="stacked">
+        Narrative Section *Freeform
+      </ion-label>
+      <ion-textarea
+        placeholder="placeholder"
+        formControlName="narrativeSec"
+      ></ion-textarea>
+    </ion-item>
+  </ion-row>
+</ng-template>
