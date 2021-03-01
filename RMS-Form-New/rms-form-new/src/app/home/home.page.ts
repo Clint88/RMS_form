@@ -1,4 +1,8 @@
+// Core+
 import { Component } from '@angular/core';
+
+// Services
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +10,8 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  // signedin = true;
 
-  constructor() {}
-
+  constructor(public auth: AuthService) {}
+  signIn = this.auth.googleSignin();
 }
