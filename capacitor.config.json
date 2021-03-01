@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "RMS-Form",
+  "appName": "rms-form-new",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

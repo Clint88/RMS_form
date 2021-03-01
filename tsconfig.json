@@ -11,8 +11,10 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2018", "dom"]
+    "module": "es2020",
+    "lib": ["es2018", "dom"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

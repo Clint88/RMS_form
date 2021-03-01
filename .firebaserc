@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "rms-form": {
+      "hosting": {
+        "app": [
+          "rms-form"
+        ]
+      }
+    }
+  }
+}
