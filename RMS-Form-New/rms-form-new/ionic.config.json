@@ -1,0 +1,7 @@
+{
+  "name": "rms-form-new",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

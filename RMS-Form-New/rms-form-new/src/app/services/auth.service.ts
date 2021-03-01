@@ -5,12 +5,7 @@ import { from, Observable, of } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 // Firebase
-import { auth } from 'firebase/app';
-
-// import { firebase } from 'firebase/app';
-// import * as firebase from 'firebase/app';
-// import 'firebase/auth';
-// import 'firebase/firestore';
+import firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
   AngularFirestore,
@@ -48,9 +43,9 @@ export class AuthService {
               map(([user, claimResult]) => {
                 const newUser: User = {
                   ...user,
-                  // isUser: claimResult.claims.isUser,
-                  // isAdmin: claimResult.claims.isAdmin,
-                  // isDeleted: claimResult.claims.isDeleted,
+                  isUser: claimResult.claims.isUser,
+                  isAdmin: claimResult.claims.isAdmin,
+                  isDeleted: claimResult.claims.isDeleted,
                 };
                 return newUser;
               })
@@ -105,14 +100,14 @@ export class AuthService {
   }
 
   async googleSignin() {
-    const provider = new auth.GoogleAuthProvider();
-    const credential: auth.UserCredential = await this.afAuth.signInWithPopup(
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const credential: firebase.auth.UserCredential = await this.afAuth.signInWithPopup(
       provider
     );
     return this.updateUserData(credential);
   }
 
-  private updateUserData(credential: auth.UserCredential) {
+  private updateUserData(credential: firebase.auth.UserCredential) {
     const user: firebase.User = credential.user;
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(

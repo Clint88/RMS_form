@@ -1,7 +1,4 @@
 {
-  "projects": {
-    "default": "rms-form"
-  },
   "targets": {
     "rms-form": {
       "hosting": {
