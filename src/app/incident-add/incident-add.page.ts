@@ -32,6 +32,15 @@ export class IncidentAddPage implements OnInit {
     const formData: Object = {};
   }
 
+  async presentModal() {
+    const modal = await this.incidentAdd.create({
+      component: ModalPage,
+      componentProps: { value: 123 }
+    });
+
+    await modal.present();
+  }
+
   ngOnInit() {
     // Define reactive form structure
     this.incidentForm = this.formBuilder.group({
@@ -39,8 +48,8 @@ export class IncidentAddPage implements OnInit {
       occurrenceDate: new FormControl('', [Validators.required]),
       occurrenceTime: new FormControl('', [Validators.required]),
       incidentType: new FormControl('', [Validators.required]),
-      location: new FormControl('', [Validators.required]),
-      locationName: new FormControl('', [Validators.required]),
+      location: new FormControl(''),
+      locationName: new FormControl(''),
       officerName: new FormControl('', [Validators.required]),
       officerSerial: new FormControl('', [Validators.required]),
       domViolence: new FormControl(''),
