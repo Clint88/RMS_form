@@ -62,7 +62,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">Address</ion-label>
-                  <ion-input placeholder="Address" formControlName="address"></ion-input>
+                  <ion-input placeholder="Address"  formControlName="address"></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col>
@@ -135,7 +135,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">Zip Code</ion-label>
-                  <ion-input placeholder="Zip Code" formControlName="zip"></ion-input>
+                  <ion-input placeholder="Zip Code" maxlength="5" formControlName="zip"></ion-input>
                 </ion-item>
               </ion-col>
 
@@ -147,14 +147,14 @@
               <ion-col>
                   <ion-item>
                     <ion-label position="stacked">SSN</ion-label>
-                    <ion-input placeholder="SSN" formControlName="ssn"></ion-input>
+                    <ion-input placeholder="SSN" maxlength="9" formControlName="ssn"></ion-input>
                   </ion-item>
                 </ion-col>
   
                 <ion-col>
                   <ion-item>
                     <ion-label position="stacked">Drivers Lisence #</ion-label>
-                    <ion-input placeholder="Lisence #" formControlName="lisence"></ion-input>
+                    <ion-input placeholder="Lisence #" maxlength="9" formControlName="lisence"></ion-input>
                   </ion-item>
                 </ion-col>
             </ion-row>
@@ -164,21 +164,21 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">Height</ion-label>
-                  <ion-input placeholder="Height" formControlName="height"></ion-input>
+                  <ion-input placeholder="Height" maxlength="3" formControlName="height"></ion-input>
                 </ion-item>
               </ion-col>
 
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">Weight</ion-label>
-                  <ion-input placeholder="Weight" formControlName="weight"></ion-input>
+                  <ion-input placeholder="Weight" maxlength="3" formControlName="weight"></ion-input>
                 </ion-item>
               </ion-col>
 
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">Phone #</ion-label>
-                  <ion-input placeholder="Phone" formControlName="phone"></ion-input>
+                  <ion-input placeholder="Phone" maxlength="10" formControlName="phone" type="tel"></ion-input>
                 </ion-item>
               </ion-col>
 
@@ -247,7 +247,43 @@
 
 
             <!-- add more forms -->
-
+            <ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-card button (click)="incidentAdd = true">
+                      <ion-item>
+                        <ion-icon
+                          name="person-add-outline"
+                          slot="start"
+                        ></ion-icon>
+                        <ion-label>Add an Incident Report</ion-label>
+                      </ion-item>
+                    </ion-card>
+                  </ion-col>
+                  <!--<ion-col>
+                    <ion-card button (click)="vehicleAdd = true">
+                      <ion-item>
+                        <ion-icon
+                          name="person-add-outline"
+                          slot="start"
+                        ></ion-icon>
+                        <ion-label>Create a Persons Report</ion-label>
+                      </ion-item>
+                    </ion-card>
+                  </ion-col> -->
+                  <ion-col>
+                    <ion-card button (click)="personAdd = true">
+                      <ion-item>
+                        <ion-icon
+                          name="person-add-outline"
+                          slot="start"
+                        ></ion-icon>
+                        <ion-label>Create a Vehicle Report</ion-label>
+                      </ion-item>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>
+              </ion-row>
 
             <!-- Submit button -->
             <ion-row>
