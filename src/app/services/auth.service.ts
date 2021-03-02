@@ -41,7 +41,6 @@ export class AuthService {
             .pipe(
               withLatestFrom(from(user.getIdTokenResult())),
               map(([user, claimResult]) => {
-                console.log(claimResult);
                 const newUser: User = {
                   ...user,
                   isUser: claimResult.claims.isUser,
@@ -64,7 +63,7 @@ export class AuthService {
     afAuth.onIdTokenChanged((user) => {
       if (user) {
         this.currentUser = user;
-        this.reportAdminStatus();
+        // this.reportAdminStatus();
       }
     });
   }
@@ -94,7 +93,6 @@ export class AuthService {
     const isUser = result.claims.isUser;
     const isAdmin = result.claims.isAdmin;
     const isDeleted = result.claims.isDeleted;
-    console.log(result);
     console.info(isUser ? 'User is a User' : 'User is not a User');
     console.info(isAdmin ? 'User is an Admin' : 'User is not an Admin');
     console.info(isDeleted ? 'User is Deleted' : 'User is not Deleted');

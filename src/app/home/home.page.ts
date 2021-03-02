@@ -17,11 +17,11 @@ export class HomePage {
 
   constructor(public auth: AuthService) {
     this.user$ = auth.user$;
-    this.user$.subscribe((user) => {
-      console.log(user);
-    });
   }
   signIn() {
     this.auth.googleSignin();
+  }
+  signOut() {
+    this.auth.signOut();
   }
 }
