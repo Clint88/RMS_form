@@ -1,5 +1,6 @@
 // Core+
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 // Reactive Forms
 import {
@@ -22,7 +23,8 @@ export class VehicleAddPage implements OnInit {
   vehicleForm: FormGroup;
   constructor(
     // Inject dependancies needed for Angular Reactive Forms
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private modalController: ModalController
   ) {}
 
   // Submits the form to the database after completing data validation
@@ -30,6 +32,14 @@ export class VehicleAddPage implements OnInit {
     // 1. Validate form data
     // 2. Submit to database
     const formData: Object = {};
+  }
+
+  async vehicleBtn() {
+    const modal = await this.modalController.create({
+      component: VehicleAddPage,
+      cssClass: 'modal-styles'
+    });
+    return await modal.present();
   }
 
   ngOnInit() {

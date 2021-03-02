@@ -73,10 +73,10 @@
                     interface="popover"
                     formControlName="incidentType"
                   >
-                    <ion-select-option value="robbery"
+                    <ion-select-option value="robberyA"
                       >Robbery (armed)</ion-select-option
                     >
-                    <ion-select-option value="robbery"
+                    <ion-select-option value="robberyU"
                       >Robbery (unarmed)</ion-select-option
                     >
                     <ion-select-option value="threat">Threat</ion-select-option>
@@ -196,7 +196,13 @@
             <ion-row>
               <ion-row>
                 <ion-col>
-                  <ion-card button (click)="incidentAdd = true">
+                  <ion-button
+                    (click)="incidentBtn()"
+                    expand="block"
+                    fill="clear"
+                    shape="round"
+                    color="success"
+                  >
                     <ion-item>
                       <ion-icon
                         name="person-add-outline"
@@ -204,10 +210,16 @@
                       ></ion-icon>
                       <ion-label>Add an Incident Report</ion-label>
                     </ion-item>
-                  </ion-card>
+                  </ion-button>
                 </ion-col>
                 <ion-col>
-                  <ion-card button (click)="vehicleAdd = true">
+                  <ion-button
+                    (click)="personBtn()"
+                    expand="block"
+                    fill="clear"
+                    shape="round"
+                    color="success"
+                  >
                     <ion-item>
                       <ion-icon
                         name="person-add-outline"
@@ -215,10 +227,16 @@
                       ></ion-icon>
                       <ion-label>Create a Persons Report</ion-label>
                     </ion-item>
-                  </ion-card>
+                  </ion-button>
                 </ion-col>
                 <ion-col>
-                  <ion-card button (click)="personAdd = true">
+                  <ion-button
+                    (click)="vehicleBtn()"
+                    expand="block"
+                    fill="clear"
+                    shape="round"
+                    color="success"
+                  >
                     <ion-item>
                       <ion-icon
                         name="person-add-outline"
@@ -226,7 +244,7 @@
                       ></ion-icon>
                       <ion-label>Create a Vehicle Report</ion-label>
                     </ion-item>
-                  </ion-card>
+                  </ion-button>
                 </ion-col>
               </ion-row>
             </ion-row>
