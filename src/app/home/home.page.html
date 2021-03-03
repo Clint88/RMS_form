@@ -13,52 +13,80 @@
     <ion-row class="ion-justify-content-center">
       <ion-text>
         <ion-card-header>
-          <ion-card-title>Title</ion-card-title>
+          <ion-card-title color="primary"
+            >West-MEC Law & Public Safety RMS</ion-card-title
+          >
         </ion-card-header>
       </ion-text>
     </ion-row>
 
     <!-- That is going to be displayed -->
-    <div *ngIf="user$; then auth; else login"></div>
-
-    <!-- Templates -->
-    <ng-template #login>
-      <ion-row class="ion-justify-content-center">
-        <ion-card>
-          <ion-item href="" class="ion-activated">
-            <ion-icon name="person-outline"></ion-icon>
-            <ion-label>Sign In</ion-label>
-          </ion-item>
-        </ion-card>
-      </ion-row>
-    </ng-template>
-
-    <ng-template #auth>
-      <ion-row class="ion-justify-content-center">
-        <ion-card>
-          <ion-row>
-            <ion-item [routerLink]="'/incident-lookup'">
-              <ion-icon name="add-circle-outline" slot="start"></ion-icon>
-              <ion-label>Create an Incident Report</ion-label>
-            </ion-item>
-          </ion-row>
-          <ion-row>
-            <ion-item [routerLink]="'/person-lookup'">
-              <ion-icon name="person-add-outline" slot="start"></ion-icon>
-              <ion-label>Create a Persons Report</ion-label>
-            </ion-item>
-          </ion-row>
-          <ion-row>
-            <ion-item [routerLink]="'/vehicle-lookup'">
-              <ion-icon name="car-sport-outline" slot="start"></ion-icon>
-              <ion-label>Create a Vehicle Report</ion-label>
-            </ion-item>
-          </ion-row>
-          <ion-row>
-            <ion-searchbar showCancelButton="focus"></ion-searchbar>
-          </ion-row>
-        </ion-card>
-      </ion-row>
-    </ng-template>
+    <div *ngIf="auth.user$ | async; then signedIn; else signedOut"></div>
   </ion-grid>
 </ion-content>
+
+<!-- Templates -->
+<ng-template #signedOut>
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-button
+      (click)="auth.googleSignin()"
+      fill="outline"
+      shape="round"
+      color="secondary"
+    >
+      <ion-icon slot="start" name="person-outline"></ion-icon>
+      Sign In
+    </ion-button>
+  </ion-row>
+</ng-template>
+
+<ng-template #signedIn>
+  <ion-row class="ion-justify-content-center">
+    <ion-card *ngIf="auth.user$ | async as user">
+      <div *ngIf="user.isUser; else unknown">
+        <ion-row>
+          <ion-item [routerLink]="'/incident-lookup'">
+            <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+            <ion-label>Create an Incident Report</ion-label>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item [routerLink]="'/person-lookup'">
+            <ion-icon name="person-add-outline" slot="start"></ion-icon>
+            <ion-label>Create a Persons Report</ion-label>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item [routerLink]="'/vehicle-lookup'">
+            <ion-icon name="car-sport-outline" slot="start"></ion-icon>
+            <ion-label>Create a Vehicle Report</ion-label>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-searchbar showCancelButton="focus"></ion-searchbar>
+        </ion-row>
+      </div>
+
+      <ion-row class="ion-justify-content-center ion-padding-vertical">
+        <ion-button
+          (click)="auth.signOut()"
+          fill="outline"
+          shape="round"
+          color="secondary"
+        >
+          <ion-icon slot="start" name="person-outline"></ion-icon>
+          Sign Out
+        </ion-button>
+      </ion-row>
+    </ion-card>
+  </ion-row>
+</ng-template>
+
+<ng-template #unknown>
+  <ion-row>
+    <ion-text color="primary" class="ion-padding-horizontal">
+      <h1>You are not authorized to access this database.</h1>
+      <h2>If you believe this is in error, please contact an admin</h2>
+    </ion-text>
+  </ion-row>
+</ng-template>

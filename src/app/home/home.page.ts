@@ -10,16 +10,5 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  signedin = false;
-  user$;
-
-  constructor(public auth: AuthService) {
-    this.user$ = auth.user$;
-  }
-  signIn() {
-    this.auth.googleSignin();
-  }
-  signOut() {
-    this.auth.signOut();
-  }
+  constructor(public auth: AuthService) {}
 }
