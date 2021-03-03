@@ -7,6 +7,8 @@ export interface Vehicle {
   model?: string;
   year?: number;
   value?: string;
+  style?: string;
+  speed?: number;
   owners: Array<string>;
   currentOwner: string;
   addNotes?: string;

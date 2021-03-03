@@ -9,7 +9,7 @@ import {
   FormBuilder,
   FormGroup,
   FormControl,
-  Validators,
+  Validators
 } from '@angular/forms';
 
 // Pages
@@ -23,7 +23,7 @@ import { Incident } from '../models/incident.model';
 @Component({
   selector: 'app-incident-add',
   templateUrl: './incident-add.page.html',
-  styleUrls: ['./incident-add.page.scss'],
+  styleUrls: ['./incident-add.page.scss']
 })
 export class IncidentAddPage implements OnInit {
   // Global Variables
@@ -65,21 +65,21 @@ export class IncidentAddPage implements OnInit {
   async incidentBtn() {
     const modal = await this.modalController.create({
       component: IncidentAddPage,
-      cssClass: 'modal-styles',
+      cssClass: 'modal-styles'
     });
     return await modal.present();
   }
   async personBtn() {
     const modal = await this.modalController.create({
       component: PersonAddPage,
-      cssClass: 'modal-styles',
+      cssClass: 'modal-styles'
     });
     return await modal.present();
   }
   async vehicleBtn() {
     const modal = await this.modalController.create({
       component: VehicleAddPage,
-      cssClass: 'modal-styles',
+      cssClass: 'modal-styles'
     });
     return await modal.present();
   }
@@ -104,14 +104,14 @@ export class IncidentAddPage implements OnInit {
 
         occurrenceDate: this.incidentForm.controls.occurrenceDate.value,
         occurrenceTime: this.incidentForm.controls.occurrenceTime.value,
-        domViolence: this.incidentForm.controls.domViolence.value,
+        domViolence: this.incidentForm.controls.domViolence.value
       })
       // Any actions which must be done to the document that require info about the document go here
-      .then(async (docRef) => {
+      .then(async docRef => {
         // Sets the reportId to the proper formatted ID as defined in the data model diagrams
         docRef.set(
           {
-            reportId: `${new Date().getFullYear()}-${docRef.id}`,
+            reportId: `${new Date().getFullYear()}-${docRef.id}`
           },
           { merge: true }
         );
@@ -134,7 +134,7 @@ export class IncidentAddPage implements OnInit {
               docRef.set(
                 {
                   persons: existingPersons.concat(newPersons),
-                  vehicles: existingVehicles.concat(newVehicles),
+                  vehicles: existingVehicles.concat(newVehicles)
                 },
                 { merge: true }
               );
@@ -154,7 +154,7 @@ export class IncidentAddPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'All required fields were not filled out',
       message: 'Please fill out all fields!',
-      buttons: ['Ok'],
+      buttons: ['Ok']
     });
 
     await alert.present();
@@ -169,15 +169,15 @@ export class IncidentAddPage implements OnInit {
           text: 'Yes',
           handler: () => {
             this.router.navigate(['/incident-add']);
-          },
+          }
         },
         {
           text: 'No',
           handler: () => {
             this.router.navigate(['/home']);
-          },
-        },
-      ],
+          }
+        }
+      ]
     });
 
     await alert.present();
@@ -195,7 +195,7 @@ export class IncidentAddPage implements OnInit {
       officerName: new FormControl('', [Validators.required]),
       officerSerial: new FormControl('', [Validators.required]),
       domViolence: new FormControl(''),
-      narrativeSec: new FormControl('', [Validators.required]),
+      narrativeSec: new FormControl('', [Validators.required])
     });
   }
 }

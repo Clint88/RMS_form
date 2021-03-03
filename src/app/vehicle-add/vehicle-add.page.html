@@ -21,7 +21,7 @@
     <ion-row class="ion-justify-content-center">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Incident Report Form</ion-card-title>
+          <ion-card-title>Vehicle Report Form</ion-card-title>
         </ion-card-header>
       </ion-card>
     </ion-row>
@@ -33,23 +33,23 @@
             <ion-row>
               <ion-col>
                 <ion-item>
-                  <ion-label position="stacked">Veh#</ion-label>
-                  <ion-input placeholder="" formControlName="veh"></ion-input>
+                  <ion-label position="stacked">Vin#</ion-label>
+                  <ion-input placeholder="" formControlName="vin"></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">License</ion-label>
-                  <ion-input
-                    placeholder=""
-                    formControlName="license"
-                  ></ion-input>
+                  <ion-input placeholder="" formControlName="plate"></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">State</ion-label>
-                  <ion-input placeholder="" formControlName="state"></ion-input>
+                  <ion-input
+                    placeholder=""
+                    formControlName="plateState"
+                  ></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -125,7 +125,7 @@
 
             <!-- Submit button -->
             <ion-row>
-              <ion-button expand="block">Submit</ion-button>
+              <ion-button expand="block" type="submit">Submit</ion-button>
             </ion-row>
           </form>
         </ion-item>
