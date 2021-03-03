@@ -19,7 +19,7 @@
     </ion-row>
 
     <!-- That is going to be displayed -->
-    <div *ngIf="signedin; then auth; else login"></div>
+    <div *ngIf="user$; then auth; else login"></div>
 
     <!-- Templates -->
     <ng-template #login>
