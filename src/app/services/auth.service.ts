@@ -63,7 +63,7 @@ export class AuthService {
     afAuth.onIdTokenChanged((user) => {
       if (user) {
         this.currentUser = user;
-        this.reportAdminStatus();
+        // this.reportAdminStatus();
       }
     });
   }
@@ -119,6 +119,10 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
     };
+    if (credential.additionalUserInfo.isNewUser) {
+      userRef.set(data, { merge: true });
+      return this.signOut();
+    }
 
     return userRef.set(data, { merge: true });
   }
