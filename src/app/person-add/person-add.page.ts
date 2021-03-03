@@ -45,6 +45,7 @@ export class PersonAddPage implements OnInit {
      gender: new FormControl('', [Validators.required]),
      race: new FormControl('', [Validators.required]),
      eye: new FormControl('', [Validators.required]),
+     hair: new FormControl('', [Validators.required]),
      marks: new FormControl('', [Validators.required]),
      hazard: new FormControl('', [Validators.required]),
      code: new FormControl('', [Validators.required]),

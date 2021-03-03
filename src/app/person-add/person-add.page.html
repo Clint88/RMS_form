@@ -224,9 +224,24 @@
                 </ion-item>
               </ion-col>
 
+              <ion-col>
+                  <ion-item>
+                    <ion-label>Hair Color:</ion-label>
+  
+                    <ion-select interface="popover" formControlName="hair">
+                      <ion-select-option value="1">BLD-BALD</ion-select-option>
+                      <ion-select-option value="2">BLN-BLONDE</ion-select-option>
+                      <ion-select-option value="3">PNK-PINK</ion-select-option>
+                      <ion-select-option value="4">BLK-Black</ion-select-option>
+                      <ion-select-option value="5">BRO-Brown</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+
             </ion-row>
 
             <ion-row>
+    
               <ion-item>
                 <ion-label position="stacked">
                   Scars/Marks/Tattoos *Freeform
@@ -260,7 +275,7 @@
                       </ion-item>
                     </ion-card>
                   </ion-col>
-                  <!--<ion-col>
+                  <ion-col>
                     <ion-card button (click)="vehicleAdd = true">
                       <ion-item>
                         <ion-icon
@@ -270,7 +285,8 @@
                         <ion-label>Create a Persons Report</ion-label>
                       </ion-item>
                     </ion-card>
-                  </ion-col> -->
+                  </ion-col>
+                  
                   <ion-col>
                     <ion-card button (click)="personAdd = true">
                       <ion-item>
