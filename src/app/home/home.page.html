@@ -19,17 +19,25 @@
     </ion-row>
 
     <!-- That is going to be displayed -->
-    <div *ngIf="signedin; then auth; else login"></div>
+    <div *ngIf="user$ | async; then auth; else login"></div>
 
     <!-- Templates -->
     <ng-template #login>
       <ion-row class="ion-justify-content-center">
-        <ion-card>
+        <!-- <ion-card>
           <ion-item href="" class="ion-activated">
             <ion-icon name="person-outline"></ion-icon>
             <ion-label>Sign In</ion-label>
           </ion-item>
-        </ion-card>
+        </ion-card> -->
+        <ion-button
+          (click)="signIn()"
+          expand="block"
+          fill="outline"
+          shape="round"
+        >
+          Sign In
+        </ion-button>
       </ion-row>
     </ng-template>
 

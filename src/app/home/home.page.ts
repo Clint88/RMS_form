@@ -1,8 +1,10 @@
 // Core+
 import { Component } from '@angular/core';
+import { User } from '../models/user.model';
+import { AuthService } from '../services/auth.service';
 
 // Services
-import { AuthService } from 'src/app/services/auth.service';
+// import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +12,16 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  // signedin = true;
+  signedin = false;
+  user$;
 
-  constructor(public auth: AuthService) {}
-  signIn = this.auth.googleSignin();
+  constructor(public auth: AuthService) {
+    this.user$ = auth.user$;
+  }
+  signIn() {
+    this.auth.googleSignin();
+  }
+  signOut() {
+    this.auth.signOut();
+  }
 }
