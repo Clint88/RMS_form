@@ -29,7 +29,7 @@
     <ion-row class="ion-justify-content-center">
       <ion-card>
         <ion-item>
-          <form [formGroup]="incidentForm" (submit)="submitForm()">
+          <form [formGroup]="incidentForm" (ngSubmit)="submitForm()">
             <ion-row>
               <ion-col>
                 <ion-item>
@@ -251,7 +251,7 @@
 
             <!-- Submit button -->
             <ion-row>
-              <ion-button expand="block">Submit</ion-button>
+              <ion-button expand="block" type="submit">Submit</ion-button>
             </ion-row>
           </form>
         </ion-item>
