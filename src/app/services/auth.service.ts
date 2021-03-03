@@ -39,7 +39,7 @@ export class AuthService {
             .doc<User>(`users/${user.uid}`)
             .valueChanges()
             .pipe(
-              withLatestFrom(from(user.getIdTokenResult())),
+              withLatestFrom(from(user.getIdTokenResult(false))),
               map(([user, claimResult]) => {
                 const newUser: User = {
                   ...user,
@@ -63,7 +63,7 @@ export class AuthService {
     afAuth.onIdTokenChanged((user) => {
       if (user) {
         this.currentUser = user;
-        // this.reportAdminStatus();
+        this.reportAdminStatus();
       }
     });
   }
@@ -89,10 +89,11 @@ export class AuthService {
 
   // Diagnostic function for testing
   async reportAdminStatus() {
-    const result = await this.currentUser.getIdTokenResult();
+    const result = await this.currentUser.getIdTokenResult(false);
     const isUser = result.claims.isUser;
     const isAdmin = result.claims.isAdmin;
     const isDeleted = result.claims.isDeleted;
+
     console.info(isUser ? 'User is a User' : 'User is not a User');
     console.info(isAdmin ? 'User is an Admin' : 'User is not an Admin');
     console.info(isDeleted ? 'User is Deleted' : 'User is not Deleted');
@@ -118,11 +119,6 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
     };
-
-    if (credential.additionalUserInfo.isNewUser) {
-      userRef.set(data, { merge: true });
-      return this.signOut();
-    }
 
     return userRef.set(data, { merge: true });
   }
