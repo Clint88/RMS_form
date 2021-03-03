@@ -1,5 +1,8 @@
 // Core+
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { PersonAddPage } from '../person-add/person-add.page';
+import { VehicleAddPage } from '../vehicle-add/vehicle-add.page';
 
 // Reactive Forms
 import {
@@ -22,7 +25,8 @@ export class IncidentAddPage implements OnInit {
   incidentForm: FormGroup;
   constructor(
     // Inject dependancies needed for Angular Reactive Forms
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private modalController: ModalController
   ) {}
 
   // Submits the form to the database after completing data validation
@@ -32,6 +36,28 @@ export class IncidentAddPage implements OnInit {
     const formData: Object = {};
   }
 
+  async incidentBtn() {
+    const modal = await this.modalController.create({
+      component: IncidentAddPage,
+      cssClass: 'modal-styles'
+    });
+    return await modal.present();
+  }
+  async personBtn() {
+    const modal = await this.modalController.create({
+      component: PersonAddPage,
+      cssClass: 'modal-styles'
+    });
+    return await modal.present();
+  }
+  async vehicleBtn() {
+    const modal = await this.modalController.create({
+      component: VehicleAddPage,
+      cssClass: 'modal-styles'
+    });
+    return await modal.present();
+  }
+
   ngOnInit() {
     // Define reactive form structure
     this.incidentForm = this.formBuilder.group({
@@ -39,8 +65,8 @@ export class IncidentAddPage implements OnInit {
       occurrenceDate: new FormControl('', [Validators.required]),
       occurrenceTime: new FormControl('', [Validators.required]),
       incidentType: new FormControl('', [Validators.required]),
-      location: new FormControl('', [Validators.required]),
-      locationName: new FormControl('', [Validators.required]),
+      location: new FormControl(''),
+      locationName: new FormControl(''),
       officerName: new FormControl('', [Validators.required]),
       officerSerial: new FormControl('', [Validators.required]),
       domViolence: new FormControl(''),
