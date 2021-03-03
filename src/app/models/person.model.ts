@@ -1,5 +1,7 @@
 export interface Person {
+  uid?: string;
   class: string;
+  name: string;
   sex: string;
   height: number;
   weight: number;

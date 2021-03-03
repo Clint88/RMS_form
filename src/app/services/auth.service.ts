@@ -39,7 +39,7 @@ export class AuthService {
             .doc<User>(`users/${user.uid}`)
             .valueChanges()
             .pipe(
-              withLatestFrom(from(user.getIdTokenResult())),
+              withLatestFrom(from(user.getIdTokenResult(false))),
               map(([user, claimResult]) => {
                 const newUser: User = {
                   ...user,
@@ -89,7 +89,7 @@ export class AuthService {
 
   // Diagnostic function for testing
   async reportAdminStatus() {
-    const result = await this.currentUser.getIdTokenResult();
+    const result = await this.currentUser.getIdTokenResult(false);
     const isUser = result.claims.isUser;
     const isAdmin = result.claims.isAdmin;
     const isDeleted = result.claims.isDeleted;

@@ -42,5 +42,36 @@
         </ion-row>
       </ion-card>
     </ion-row>
+    <!-- Firestore Output -->
+    <ion-row class="ion-justify-content-center">
+      <ion-col
+        *ngFor="let incident of incidents | async"
+        class="ion-text-nowrap"
+      >
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle color="tertiary">
+              Officer: {{ incident.officerName }}
+            </ion-card-subtitle>
+            <ion-card-title>{{ incident.reportId }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-text color="primary">
+              <h4>Incident Type: {{ incident.codeName }}</h4>
+            </ion-text>
+            <br />
+            <ion-button
+              expand="fit"
+              fill="outline"
+              shape="round"
+              color="secondary"
+              (click)="openInfoModal(incident)"
+            >
+              View More
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

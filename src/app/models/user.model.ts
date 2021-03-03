@@ -1,7 +1,7 @@
 export interface User {
+  uid?: string;
   displayName: string;
   email: string;
-  uid: string;
   perfersDark?: boolean;
   isUser?: boolean;
   isAdmin?: boolean;

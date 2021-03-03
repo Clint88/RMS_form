@@ -1,4 +1,5 @@
 export interface Vehicle {
+  uid?: string;
   vin?: string;
   plate?: string;
   plateState?: string;

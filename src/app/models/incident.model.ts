@@ -1,4 +1,5 @@
 export interface Incident {
+  uid?: string;
   reportId: string;
   codeName: string;
   location: string;
