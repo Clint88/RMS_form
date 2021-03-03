@@ -31,6 +31,8 @@ export class IncidentAddPage implements OnInit {
   vehicleAdd: boolean = false;
   personAdd: boolean = false;
   incidentForm: FormGroup;
+  persons: Array<string>;
+  vehicles: Array<string>;
 
   constructor(
     // Inject dependancies needed for Angular Reactive Forms
@@ -74,6 +76,11 @@ export class IncidentAddPage implements OnInit {
       component: PersonAddPage,
       cssClass: 'modal-styles',
     });
+
+    modal.onDidDismiss().then((data) => {
+      this.persons = data['data']; // Here's your selected user!
+    });
+
     return await modal.present();
   }
   async vehicleBtn() {
@@ -81,6 +88,11 @@ export class IncidentAddPage implements OnInit {
       component: VehicleAddPage,
       cssClass: 'modal-styles',
     });
+
+    modal.onDidDismiss().then((data) => {
+      this.vehicles = data['data']; // Here's your selected user!
+    });
+
     return await modal.present();
   }
 
@@ -125,10 +137,10 @@ export class IncidentAddPage implements OnInit {
             (doc: firebase.default.firestore.DocumentSnapshot<Incident>) => {
               // Storage for person arrays
               const existingPersons: Array<string> = doc.data().persons;
-              let newPersons: Array<string> = [];
+              let newPersons: Array<string> = this.vehicles;
               // Storage for vehicle arrays
               const existingVehicles: Array<string> = doc.data().vehicles;
-              let newVehicles: Array<string> = [];
+              let newVehicles: Array<string> = this.vehicles;
 
               // Send updated arrays to the document
               docRef.set(
