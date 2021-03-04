@@ -71,13 +71,30 @@ export class PersonAddPage implements OnInit {
       .add({
         // Injected Properties
         // Form Data
-        // vin: this.personForm.controls.vin.value,
-        // plate: this.personForm.controls.plate.value,
-        // plateState: this.personForm.controls.plateState.value,
-        // color: this.personForm.controls.color.value,
-        // make: this.personForm.controls.make.value,
-        // model: this.personForm.controls.model.value,
-        // year: this.personForm.controls.year.value
+        code: this.personForm.controls.code.value,
+        firstN: this.personForm.controls.firstN.value,
+        lastN: this.personForm.controls.lastN.value,
+        middleN: this.personForm.controls.middleN.value,
+        address: this.personForm.controls.address.value,
+        city: this.personForm.controls.city.value,
+        state: this.personForm.controls.state.value,
+        zip: this.personForm.controls.zip.value,
+        dob: this.personForm.controls.dob.value,
+        dln: this.personForm.controls.dln.value,
+        ssn: this.personForm.controls.ssn.value,
+        height: this.personForm.controls.height.value,
+        weight: this.personForm.controls.weight.value,
+        sex: this.personForm.controls.sex.value,
+        age: this.personForm.controls.age.value,
+        race: this.personForm.controls.race.value,
+        eyeColor: this.personForm.controls.eyeColor.value,
+        hairColor: this.personForm.controls.hairColor.value,
+        gang: this.personForm.controls.gang.value,
+        scars: this.personForm.controls.scars.value,
+        marks: this.personForm.controls.marks.value,
+        tattoos: this.personForm.controls.tattoos.value,
+        phone: this.personForm.controls.phone.value,
+        hazard: this.personForm.controls.hazard.value
       })
       // Any actions which must be done to the document that require info about the document go here
       .then(async docRef => {
@@ -147,13 +164,17 @@ export class PersonAddPage implements OnInit {
       dln: new FormControl('', [Validators.required]),
       height: new FormControl('', [Validators.required]),
       weight: new FormControl('', [Validators.required]),
+      age: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       sex: new FormControl('', [Validators.required]),
       race: new FormControl('', [Validators.required]),
       eyeColor: new FormControl('', [Validators.required]),
-      gang: new FormControl('', [Validators.required]),
-      mst: new FormControl('', [Validators.required]),
-      hazard: new FormControl('', [Validators.required])
+      hairColor: new FormControl('', [Validators.required]),
+      gang: new FormControl(''),
+      scars: new FormControl(''),
+      marks: new FormControl(''),
+      tattoos: new FormControl(''),
+      hazard: new FormControl('')
     });
   }
 }
