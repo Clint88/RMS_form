@@ -1,6 +1,6 @@
 // Core+
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, NavParams } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,7 @@ import {
   FormBuilder,
   FormGroup,
   FormControl,
-  Validators
+  Validators,
 } from '@angular/forms';
 
 // Pages
@@ -18,12 +18,16 @@ import { VehicleAddPage } from '../vehicle-add/vehicle-add.page';
 
 // Services
 import { AuthService } from '../services/auth.service';
+import { VehicleService } from '../services/vehicle.service';
+
+// Models
 import { Incident } from '../models/incident.model';
+import { Vehicle } from '../models/vehicle.model';
 
 @Component({
   selector: 'app-incident-add',
   templateUrl: './incident-add.page.html',
-  styleUrls: ['./incident-add.page.scss']
+  styleUrls: ['./incident-add.page.scss'],
 })
 export class IncidentAddPage implements OnInit {
   // Global Variables
@@ -31,8 +35,8 @@ export class IncidentAddPage implements OnInit {
   vehicleAdd: boolean = false;
   personAdd: boolean = false;
   incidentForm: FormGroup;
-  persons: Array<string>;
-  vehicles: Array<string>;
+  persons: Array<string> = [];
+  vehicles: Array<string> = [];
 
   constructor(
     // Inject dependancies needed for Angular Reactive Forms
@@ -41,22 +45,18 @@ export class IncidentAddPage implements OnInit {
     private auth: AuthService,
     private alertController: AlertController,
     private modalController: ModalController,
-    private router: Router
+    private router: Router,
+    private vehicleService: VehicleService
   ) {}
+
+  appendVehicles = this.vehicleService.appendVehicles$;
 
   // Submits the form to the database after completing data validation
   async submitForm() {
     // Makes sure that the "valid" property on the form is set to "VALID",
     // if it's not (meaning a required field was not filled in), it alerts the user and doesn't add the doc
     if (this.incidentForm.status === 'VALID') {
-      if (this.incidentForm.status === 'VALID') {
-        // Submit Data to the firestore if the form is valid
-        await this.addincidentForm();
-      } else {
-        // alerts the user when not all the form fields are filled in
-        console.error('All required fields were not filled out');
-        this.failedAlert();
-      }
+      await this.addincidentForm();
     } else {
       // alerts the user when not all the form fields are filled in
       console.error('All required fields were not filled out');
@@ -67,14 +67,16 @@ export class IncidentAddPage implements OnInit {
   async incidentBtn() {
     const modal = await this.modalController.create({
       component: IncidentAddPage,
-      cssClass: 'modal-styles'
+      cssClass: 'modal-styles',
     });
     return await modal.present();
   }
   async personBtn() {
+    const status = { isModal: true };
     const modal = await this.modalController.create({
       component: PersonAddPage,
-      cssClass: 'modal-styles'
+      componentProps: { status: status },
+      cssClass: 'modal-styles',
     });
 
     modal.onDidDismiss().then((data) => {
@@ -84,13 +86,17 @@ export class IncidentAddPage implements OnInit {
     return await modal.present();
   }
   async vehicleBtn() {
+    const status = { isModal: true };
     const modal = await this.modalController.create({
       component: VehicleAddPage,
-      cssClass: 'modal-styles'
+      componentProps: { status: status },
+      cssClass: 'modal-styles',
     });
 
-    modal.onDidDismiss().then((data) => {
-      this.vehicles = data['data']; // Here's your selected user!
+    modal.onDidDismiss().then(async (data) => {
+      const vehicleId = data['data'];
+      await this.vehicles.push(vehicleId); // Here's your vehicle
+      await this.vehicleService.setLinkedVehicles(this.vehicles);
     });
 
     return await modal.present();
@@ -116,14 +122,14 @@ export class IncidentAddPage implements OnInit {
 
         occurrenceDate: this.incidentForm.controls.occurrenceDate.value,
         occurrenceTime: this.incidentForm.controls.occurrenceTime.value,
-        domViolence: this.incidentForm.controls.domViolence.value
+        domViolence: this.incidentForm.controls.domViolence.value,
       })
       // Any actions which must be done to the document that require info about the document go here
-      .then(async docRef => {
+      .then(async (docRef) => {
         // Sets the reportId to the proper formatted ID as defined in the data model diagrams
         docRef.set(
           {
-            reportId: `${new Date().getFullYear()}-${docRef.id}`
+            reportId: `${new Date().getFullYear()}-${docRef.id}`,
           },
           { merge: true }
         );
@@ -146,7 +152,7 @@ export class IncidentAddPage implements OnInit {
               docRef.set(
                 {
                   persons: existingPersons.concat(newPersons),
-                  vehicles: existingVehicles.concat(newVehicles)
+                  vehicles: existingVehicles.concat(newVehicles),
                 },
                 { merge: true }
               );
@@ -166,7 +172,7 @@ export class IncidentAddPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'All required fields were not filled out',
       message: 'Please fill out all fields!',
-      buttons: ['Ok']
+      buttons: ['Ok'],
     });
 
     await alert.present();
@@ -181,15 +187,15 @@ export class IncidentAddPage implements OnInit {
           text: 'Yes',
           handler: () => {
             this.router.navigate(['/incident-add']);
-          }
+          },
         },
         {
           text: 'No',
           handler: () => {
             this.router.navigate(['/home']);
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await alert.present();
@@ -207,7 +213,7 @@ export class IncidentAddPage implements OnInit {
       officerName: new FormControl('', [Validators.required]),
       officerSerial: new FormControl('', [Validators.required]),
       domViolence: new FormControl(''),
-      narrativeSec: new FormControl('', [Validators.required])
+      narrativeSec: new FormControl('', [Validators.required]),
     });
   }
 }

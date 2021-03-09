@@ -238,13 +238,23 @@
                     color="success"
                   >
                     <ion-item>
-                      <ion-icon
-                        name="person-add-outline"
-                        slot="start"
-                      ></ion-icon>
+                      <ion-icon name="person-add-outline" slot="start">
+                      </ion-icon>
                       <ion-label>Create a Vehicle Report</ion-label>
                     </ion-item>
                   </ion-button>
+                  <ion-text *ngIf="vehicles.length >= 1" color="primary">
+                    <h3>Attached Vehicles</h3>
+                  </ion-text>
+                  <div *ngFor="let vehicle of appendVehicles | async">
+                    <ion-text color="secondary">
+                      {{ vehicle.plate }}&mdash; {{ vehicle.plateState }}
+                    </ion-text>
+                    <br />
+                    <ion-text color="tertiary">
+                      {{ vehicle.make }}&mdash; {{ vehicle.model }}
+                    </ion-text>
+                  </div>
                 </ion-col>
               </ion-row>
             </ion-row>

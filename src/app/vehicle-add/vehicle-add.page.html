@@ -1,3 +1,19 @@
+<ion-header *ngIf="this.status.isModal">
+  <ion-toolbar>
+    <ion-title>Add a Vehicle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        (click)="close()"
+        fill="clear"
+        shape="round"
+        color="secondary"
+      >
+        <ion-label>Close</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content class="ion-padding">
   <ion-grid>
     <!-- Logo and the title -->
@@ -11,7 +27,7 @@
       />
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <ion-text>
+      <ion-text *ngIf="!this.status.isModal">
         <ion-card-header>
           <ion-card-title>Title</ion-card-title>
         </ion-card-header>

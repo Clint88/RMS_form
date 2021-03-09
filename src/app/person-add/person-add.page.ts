@@ -1,6 +1,6 @@
 // Core+
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, NavParams } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -9,45 +9,45 @@ import {
   FormBuilder,
   FormGroup,
   FormControl,
-  Validators
+  Validators,
 } from '@angular/forms';
 
-// Services
-import { AuthService } from '../services/auth.service';
+// Modal
 import { Person } from '../models/person.model';
 
 @Component({
   selector: 'app-person-add',
   templateUrl: './person-add.page.html',
-  styleUrls: ['./person-add.page.scss']
+  styleUrls: ['./person-add.page.scss'],
+  providers: [NavParams],
 })
 export class PersonAddPage implements OnInit {
   // Global Variables
   personAdd: boolean = false;
   personForm: FormGroup;
+  status = { isModal: false };
 
   constructor(
     // Inject dependancies needed for Angular Reactive Forms
     public formBuilder: FormBuilder,
     private modalController: ModalController,
+    private navParams: NavParams,
     private afs: AngularFirestore,
-    private auth: AuthService,
     private alertController: AlertController,
     private router: Router
-  ) {}
+  ) {
+    if (this.navParams.get('status')) {
+      this.status = this.navParams.get('status');
+    }
+  }
 
   // Submits the form to the database after completing data validation
   async submitForm() {
     // Makes sure that the "valid" property on the form is set to "VALID",
     // if it's not (meaning a required field was not filled in), it alerts the user and doesn't add the doc
     if (this.personForm.status === 'VALID') {
-      if (this.personForm.status === 'VALID') {
-        // Submit Data to the firestore if the form is valid
-        await this.addpersonForm();
-      } else {
-        // alerts the user when not all the form fields are filled in
-        console.error('All required fields were not filled out');
-        this.failedAlert();
+      if (this.status.isModal) {
+        await this.addpersonForm(this.status.isModal);
       }
     } else {
       // alerts the user when not all the form fields are filled in
@@ -59,12 +59,12 @@ export class PersonAddPage implements OnInit {
   async personBtn() {
     const modal = await this.modalController.create({
       component: PersonAddPage,
-      cssClass: 'modal-styles'
+      cssClass: 'modal-styles',
     });
     return await modal.present();
   }
 
-  async addpersonForm() {
+  async addpersonForm(isModal?: boolean) {
     // Adds the visit info collected in the form to a new document in firestore
     this.afs
       .collection('persons')
@@ -80,11 +80,11 @@ export class PersonAddPage implements OnInit {
         // year: this.personForm.controls.year.value
       })
       // Any actions which must be done to the document that require info about the document go here
-      .then(async docRef => {
+      .then(async (docRef) => {
         // Sets the reportId to the proper formatted ID as defined in the data model diagrams
         docRef.set(
           {
-            reportId: `${new Date().getFullYear()}-${docRef.id}`
+            reportId: `${new Date().getFullYear()}-${docRef.id}`,
           },
           { merge: true }
         );
@@ -98,11 +98,20 @@ export class PersonAddPage implements OnInit {
     this.successAlert();
   }
 
+  // Closes the modal
+  modalClose(docId?: string): void {
+    if (docId) {
+      this.modalController.dismiss(docId);
+    } else {
+      this.modalController.dismiss();
+    }
+  }
+
   async failedAlert() {
     const alert = await this.alertController.create({
       header: 'All required fields were not filled out',
       message: 'Please fill out all fields!',
-      buttons: ['Ok']
+      buttons: ['Ok'],
     });
 
     await alert.present();
@@ -117,21 +126,22 @@ export class PersonAddPage implements OnInit {
           text: 'Yes',
           handler: () => {
             this.router.navigate(['/person-add']);
-          }
+          },
         },
         {
           text: 'No',
           handler: () => {
             this.router.navigate(['/home']);
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await alert.present();
   }
 
   ngOnInit() {
+    console.log('Status', this.status.isModal);
     // Define reactive form structure
     this.personForm = this.formBuilder.group({
       code: new FormControl('', [Validators.required]),
@@ -153,7 +163,7 @@ export class PersonAddPage implements OnInit {
       eyeColor: new FormControl('', [Validators.required]),
       gang: new FormControl('', [Validators.required]),
       mst: new FormControl('', [Validators.required]),
-      hazard: new FormControl('', [Validators.required])
+      hazard: new FormControl('', [Validators.required]),
     });
   }
 }

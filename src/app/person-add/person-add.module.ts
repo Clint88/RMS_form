@@ -13,8 +13,8 @@ import { PersonAddPage } from './person-add.page';
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
-    PersonAddPageRoutingModule
+    PersonAddPageRoutingModule,
   ],
-  declarations: [PersonAddPage]
+  declarations: [PersonAddPage],
 })
 export class PersonAddPageModule {}
