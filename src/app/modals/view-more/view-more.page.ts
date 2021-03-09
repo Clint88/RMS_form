@@ -7,6 +7,7 @@ import { ModalController, NavParams, AlertController } from '@ionic/angular';
   selector: 'app-view-more',
   templateUrl: './view-more.page.html',
   styleUrls: ['./view-more.page.scss'],
+  providers: [NavParams],
 })
 export class ViewMorePage implements OnInit {
   // Global Variables
@@ -15,15 +16,17 @@ export class ViewMorePage implements OnInit {
     vehicle: false,
     incident: false,
   };
+  data: object;
 
   constructor(
     private modalController: ModalController,
-    private navParams: NavParams,
-    private alertController: AlertController,
-    private router: Router
+    private navParams: NavParams
   ) {
     if (this.navParams.get('type')) {
       this.type = this.navParams.get('type');
+    }
+    if (this.navParams.get('data')) {
+      this.data = this.navParams.get('data');
     }
   }
 

@@ -75,10 +75,13 @@ const routes: Routes = [
         (m) => m.VehicleLookupPageModule
       ),
   },
-  // {
-  //   path: 'view-more',
-  //   loadChildren: () => import('./modals/view-more/view-more.module').then( m => m.ViewMorePageModule)
-  // },
+  {
+    path: 'view-more',
+    loadChildren: () =>
+      import('./modals/view-more/view-more.module').then(
+        (m) => m.ViewMorePageModule
+      ),
+  },
 ];
 
 @NgModule({
