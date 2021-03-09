@@ -228,6 +228,19 @@
                       <ion-label>Create a Persons Report</ion-label>
                     </ion-item>
                   </ion-button>
+                  <ion-text *ngIf="persons.length >= 1" color="primary">
+                    <h3>Attached Persons</h3>
+                  </ion-text>
+                  <div *ngFor="let person of appendPersons | async">
+                    <ion-text color="secondary">
+                      {{ person.lastN }}, {{ person.firstN }} {{ person.middleN
+                      }}
+                    </ion-text>
+                    <br />
+                    <ion-text color="tertiary">
+                      {{ person.city }}, {{ person.state }} {{ person.zip }}
+                    </ion-text>
+                  </div>
                 </ion-col>
                 <ion-col>
                   <ion-button

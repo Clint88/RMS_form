@@ -19,10 +19,10 @@ import { VehicleAddPage } from '../vehicle-add/vehicle-add.page';
 // Services
 import { AuthService } from '../services/auth.service';
 import { VehicleService } from '../services/vehicle.service';
+import { PersonService } from '../services/person.service';
 
 // Models
 import { Incident } from '../models/incident.model';
-import { Vehicle } from '../models/vehicle.model';
 
 @Component({
   selector: 'app-incident-add',
@@ -30,6 +30,20 @@ import { Vehicle } from '../models/vehicle.model';
   styleUrls: ['./incident-add.page.scss'],
 })
 export class IncidentAddPage implements OnInit {
+  constructor(
+    // Inject dependancies needed for Angular Reactive Forms
+    public formBuilder: FormBuilder,
+    private afs: AngularFirestore,
+    // Custom Services
+    private auth: AuthService,
+    private vehicleService: VehicleService,
+    private personService: PersonService,
+    // Controllers and routers
+    private alertController: AlertController,
+    private modalController: ModalController,
+    private router: Router
+  ) {}
+
   // Global Variables
   incidentAdd: boolean = false;
   vehicleAdd: boolean = false;
@@ -37,19 +51,8 @@ export class IncidentAddPage implements OnInit {
   incidentForm: FormGroup;
   persons: Array<string> = [];
   vehicles: Array<string> = [];
-
-  constructor(
-    // Inject dependancies needed for Angular Reactive Forms
-    public formBuilder: FormBuilder,
-    private afs: AngularFirestore,
-    private auth: AuthService,
-    private alertController: AlertController,
-    private modalController: ModalController,
-    private router: Router,
-    private vehicleService: VehicleService
-  ) {}
-
   appendVehicles = this.vehicleService.appendVehicles$;
+  appendPersons = this.personService.appendPersons$;
 
   // Submits the form to the database after completing data validation
   async submitForm() {
@@ -79,8 +82,10 @@ export class IncidentAddPage implements OnInit {
       cssClass: 'modal-styles',
     });
 
-    modal.onDidDismiss().then((data) => {
-      this.persons = data['data']; // Here's your selected user!
+    modal.onDidDismiss().then(async (data) => {
+      const personId = data['data'];
+      await this.persons.push(personId); // Here's your vehicle
+      await this.personService.setLinkedPersons(this.persons);
     });
 
     return await modal.present();
@@ -108,8 +113,6 @@ export class IncidentAddPage implements OnInit {
       .collection('incidents')
       .add({
         // Injected Properties
-        persons: [],
-        vehicles: [],
         creatorUid: this.auth.currentUser.uid,
         officerName: this.auth.currentUser.displayName,
         officerId: `WMLPS-${this.auth.currentUser.uid}`,
@@ -135,27 +138,54 @@ export class IncidentAddPage implements OnInit {
         );
 
         // Add in any persons or vehicles
-        console.log(docRef.get());
         const incidentDoc = this.afs.collection('incidents').doc(docRef.id);
         await incidentDoc.ref
           .get()
           .then(
             (doc: firebase.default.firestore.DocumentSnapshot<Incident>) => {
-              // Storage for person arrays
-              const existingPersons: Array<string> = doc.data().persons;
-              let newPersons: Array<string> = this.vehicles;
-              // Storage for vehicle arrays
-              const existingVehicles: Array<string> = doc.data().vehicles;
-              let newVehicles: Array<string> = this.vehicles;
+              // Check to see if there are pre-existing linked docs
+              if (doc.data().persons) {
+                // Storage for person arrays
+                const existingPersons: Array<string> = doc.data().persons;
 
-              // Send updated arrays to the document
-              docRef.set(
-                {
-                  persons: existingPersons.concat(newPersons),
-                  vehicles: existingVehicles.concat(newVehicles),
-                },
-                { merge: true }
-              );
+                // Send updated array to the document
+                docRef.set(
+                  {
+                    persons: existingPersons.concat(this.persons),
+                  },
+                  { merge: true }
+                );
+              } else {
+                // Send new array only to the document
+                docRef.set(
+                  {
+                    persons: this.persons,
+                  },
+                  { merge: true }
+                );
+              }
+
+              // Check to see if there are pre-existing linked docs
+              if (doc.data().vehicles) {
+                // Storage for vehicle arrays
+                const existingVehicles: Array<string> = doc.data().vehicles;
+
+                // Send updated array to the document
+                docRef.set(
+                  {
+                    vehicles: existingVehicles.concat(this.vehicles),
+                  },
+                  { merge: true }
+                );
+              } else {
+                // Send new array only to the document
+                docRef.set(
+                  {
+                    vehicles: this.vehicles,
+                  },
+                  { merge: true }
+                );
+              }
             }
           );
       });
