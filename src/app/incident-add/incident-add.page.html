@@ -33,40 +33,6 @@
             <ion-row>
               <ion-col>
                 <ion-item>
-                  <ion-label position="stacked">I.R #</ion-label>
-                  <ion-input
-                    placeholder="xxxx"
-                    formControlName="iR"
-                  ></ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col>
-                <ion-item>
-                  <ion-label position="stacked">Occurrence Date</ion-label>
-                  <ion-input
-                    placeholder="xx/xx/xxxx"
-                    formControlName="occurrenceDate"
-                  ></ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col>
-                <ion-item>
-                  <ion-label position="stacked">Occurrence Times</ion-label>
-                  <ion-input
-                    placeholder="xx/xx/xxxx"
-                    formControlName="occurrenceTime"
-                  ></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12">
-                <ion-input *ngIf="robbery">Test</ion-input>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <ion-item>
                   <ion-label>Incident Type</ion-label>
 
                   <ion-select
@@ -129,6 +95,42 @@
               </ion-col>
               <ion-col>
                 <ion-item>
+                  <ion-label position="stacked">Occurrence Date</ion-label>
+                  <ion-datetime
+                    placeholder="Month day, year"
+                    formControlName="occurrenceDate"
+                    maxlength = ""
+                  ></ion-datetime>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Occurrence Times</ion-label>
+                  <ion-datetime
+                  placeholder="Month day, year"
+                  formControlName="occurrenceTime"
+                  ></ion-datetime>
+                </ion-item>
+              </ion-col>
+              
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-input *ngIf="robbery">Test</ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Officer Name</ion-label>
+                  <ion-input
+                    placeholder="Last, First"
+                    formControlName="officerName"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
                   <ion-label position="stacked">Location</ion-label>
                   <ion-input
                     placeholder="11111 n 1st ln, city"
@@ -146,36 +148,9 @@
                 </ion-item>
               </ion-col>
             </ion-row>
+            
             <ion-row>
               <ion-col>
-                <ion-item>
-                  <ion-label position="stacked">Officer Name</ion-label>
-                  <ion-input
-                    placeholder="Last, First"
-                    formControlName="officerName"
-                  ></ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col>
-                <ion-item>
-                  <ion-label position="stacked">Officer Serial #</ion-label>
-                  <ion-input
-                    placeholder="xxxxx"
-                    formControlName="officerSerial"
-                  ></ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col>
-                <ion-item>
-                  <ion-label position="stacked">DV Domestic Violence</ion-label>
-                  <ion-input
-                    placeholder="*Opt"
-                    formControlName="domViolence"
-                  ></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row>
               <ion-item>
                 <ion-label position="stacked">
                   Narrative Section *Freeform
@@ -185,6 +160,13 @@
                   formControlName="narrativeSec"
                 ></ion-textarea>
               </ion-item>
+              </ion-col>
+              <ion-col class="ion-align-self-end">
+                <ion-item>
+                  <ion-label position="stacked">DV Domestic Violence</ion-label>
+                  <ion-checkbox formControlName="domViolence"></ion-checkbox>
+                </ion-item>
+                </ion-col>
             </ion-row>
 
             <!-- templates -->

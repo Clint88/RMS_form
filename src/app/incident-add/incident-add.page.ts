@@ -30,6 +30,7 @@ export class IncidentAddPage implements OnInit {
   incidentAdd: boolean = false;
   vehicleAdd: boolean = false;
   personAdd: boolean = false;
+  dv: boolean = false;
   incidentForm: FormGroup;
 
   constructor(
