@@ -1,7 +1,23 @@
+<ion-header *ngIf="this.status.isModal">
+  <ion-toolbar>
+    <ion-title>Add a Vehicle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        (click)="close()"
+        fill="clear"
+        shape="round"
+        color="secondary"
+      >
+        <ion-label>Close</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content class="ion-padding">
   <ion-grid>
     <!-- Logo and the title -->
-    <ion-row class="ion-justify-content-center">
+    <ion-row class="ion-justify-content-center" *ngIf="!this.status.isModal">
       <img
         src="assets/policeLogo.jpg"
         alt="logo"
@@ -13,18 +29,11 @@
     <ion-row class="ion-justify-content-center">
       <ion-text>
         <ion-card-header>
-          <ion-card-title>Title</ion-card-title>
+          <ion-card-title color="primary">Person Report Form</ion-card-title>
         </ion-card-header>
       </ion-text>
     </ion-row>
-    <!-- Title for page -->
-    <ion-row class="ion-justify-content-center">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Persons Report Form</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    </ion-row>
+
     <!-- Form -->
     <ion-row class="ion-justify-content-center">
       <ion-card>
@@ -378,8 +387,16 @@
             </ion-row>
 
             <!-- Submit button -->
-            <ion-row>
-              <ion-button expand="block" type="submit">Submit</ion-button>
+            <ion-row class="ion-justify-content-center">
+              <ion-button
+                expand="block"
+                type="submit"
+                fill="outline"
+                shape="round"
+                color="secondary"
+                class="ion-margin-vertical"
+                >Submit</ion-button
+              >
             </ion-row>
           </form>
         </ion-item>

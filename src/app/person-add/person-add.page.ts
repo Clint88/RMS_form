@@ -151,7 +151,6 @@ export class PersonAddPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Status', this.status.isModal);
     // Define reactive form structure
     this.personForm = this.formBuilder.group({
       code: new FormControl('', [Validators.required]),

@@ -131,7 +131,6 @@ export class VehicleAddPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.status.isModal);
     // Define reactive form structure
     this.vehicleForm = this.formBuilder.group({
       vin: new FormControl(''),

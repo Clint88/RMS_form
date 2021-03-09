@@ -13,18 +13,11 @@
     <ion-row class="ion-justify-content-center">
       <ion-text>
         <ion-card-header>
-          <ion-card-title>Title</ion-card-title>
+          <ion-card-title color="primary">Incident Report Form</ion-card-title>
         </ion-card-header>
       </ion-text>
     </ion-row>
-    <!-- Title for page -->
-    <ion-row class="ion-justify-content-center">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Incident Report Form</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    </ion-row>
+
     <!-- Form -->
     <ion-row class="ion-justify-content-center">
       <ion-card>
@@ -177,13 +170,12 @@
             </ion-row>
             <ion-row>
               <ion-item>
-                <ion-label position="stacked">
-                  Narrative Section *Freeform
-                </ion-label>
+                <ion-label position="stacked">Narrative Section</ion-label>
                 <ion-textarea
                   placeholder="placeholder"
                   formControlName="narrativeSec"
-                ></ion-textarea>
+                >
+                </ion-textarea>
               </ion-item>
             </ion-row>
 
@@ -193,40 +185,18 @@
             <div *ngIf="incidentAdd; then add"></div>
 
             <!-- add more forms -->
-            <ion-row>
+            <ion-row class="ion-justify-content-center">
               <ion-row>
-                <ion-col>
-                  <ion-button
-                    (click)="incidentBtn()"
-                    expand="block"
-                    fill="clear"
-                    shape="round"
-                    color="success"
-                  >
-                    <ion-item>
-                      <ion-icon
-                        name="person-add-outline"
-                        slot="start"
-                      ></ion-icon>
-                      <ion-label>Add an Incident Report</ion-label>
-                    </ion-item>
-                  </ion-button>
-                </ion-col>
                 <ion-col>
                   <ion-button
                     (click)="personBtn()"
                     expand="block"
-                    fill="clear"
+                    fill="outline"
                     shape="round"
-                    color="success"
+                    color="tertiary"
                   >
-                    <ion-item>
-                      <ion-icon
-                        name="person-add-outline"
-                        slot="start"
-                      ></ion-icon>
-                      <ion-label>Create a Persons Report</ion-label>
-                    </ion-item>
+                    <ion-icon name="person-add-outline" slot="start"></ion-icon>
+                    Attach New Person
                   </ion-button>
                   <ion-text *ngIf="persons.length >= 1" color="primary">
                     <h3>Attached Persons</h3>
@@ -246,26 +216,23 @@
                   <ion-button
                     (click)="vehicleBtn()"
                     expand="block"
-                    fill="clear"
+                    fill="outline"
                     shape="round"
-                    color="success"
+                    color="tertiary"
                   >
-                    <ion-item>
-                      <ion-icon name="person-add-outline" slot="start">
-                      </ion-icon>
-                      <ion-label>Create a Vehicle Report</ion-label>
-                    </ion-item>
+                    <ion-icon name="car-sport-outline" slot="start"> </ion-icon>
+                    Attach New Vehicle
                   </ion-button>
                   <ion-text *ngIf="vehicles.length >= 1" color="primary">
                     <h3>Attached Vehicles</h3>
                   </ion-text>
                   <div *ngFor="let vehicle of appendVehicles | async">
-                    <ion-text color="secondary">
-                      {{ vehicle.plate }}&mdash; {{ vehicle.plateState }}
-                    </ion-text>
-                    <br />
                     <ion-text color="tertiary">
                       {{ vehicle.make }}&mdash; {{ vehicle.model }}
+                    </ion-text>
+                    <br />
+                    <ion-text color="secondary">
+                      {{ vehicle.plate }}&mdash; {{ vehicle.plateState }}
                     </ion-text>
                   </div>
                 </ion-col>
@@ -273,8 +240,17 @@
             </ion-row>
 
             <!-- Submit button -->
-            <ion-row>
-              <ion-button expand="block" type="submit">Submit</ion-button>
+            <ion-row class="ion-justify-content-center">
+              <ion-button
+                expand="block"
+                type="submit"
+                fill="outline"
+                shape="round"
+                color="secondary"
+                class="ion-margin-vertical"
+              >
+                Submit
+              </ion-button>
             </ion-row>
           </form>
         </ion-item>

@@ -1,6 +1,6 @@
 // Core+
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController, NavParams } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -67,13 +67,6 @@ export class IncidentAddPage implements OnInit {
     }
   }
 
-  async incidentBtn() {
-    const modal = await this.modalController.create({
-      component: IncidentAddPage,
-      cssClass: 'modal-styles',
-    });
-    return await modal.present();
-  }
   async personBtn() {
     const status = { isModal: true };
     const modal = await this.modalController.create({
@@ -84,8 +77,11 @@ export class IncidentAddPage implements OnInit {
 
     modal.onDidDismiss().then(async (data) => {
       const personId = data['data'];
-      await this.persons.push(personId); // Here's your vehicle
-      await this.personService.setLinkedPersons(this.persons);
+      // Check to make sure an non-undefined value was passed back
+      if (personId) {
+        await this.persons.push(personId); // Here's your person
+        await this.personService.setLinkedPersons(this.persons);
+      }
     });
 
     return await modal.present();
@@ -100,8 +96,11 @@ export class IncidentAddPage implements OnInit {
 
     modal.onDidDismiss().then(async (data) => {
       const vehicleId = data['data'];
-      await this.vehicles.push(vehicleId); // Here's your vehicle
-      await this.vehicleService.setLinkedVehicles(this.vehicles);
+      // Check to make sure an non-undefined value was passed back
+      if (vehicleId) {
+        await this.vehicles.push(vehicleId); // Here's your vehicle
+        await this.vehicleService.setLinkedVehicles(this.vehicles);
+      }
     });
 
     return await modal.present();
