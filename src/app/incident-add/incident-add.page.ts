@@ -234,14 +234,12 @@ export class IncidentAddPage implements OnInit {
   async ngOnInit() {
     // Define reactive form structure
     this.incidentForm = this.formBuilder.group({
-      iR: new FormControl('', [Validators.required]),
       occurrenceDate: new FormControl('', [Validators.required]),
       occurrenceTime: new FormControl('', [Validators.required]),
       incidentType: new FormControl('', [Validators.required]),
       location: new FormControl(''),
       locationName: new FormControl(''),
       officerName: new FormControl('', [Validators.required]),
-      officerSerial: new FormControl('', [Validators.required]),
       domViolence: new FormControl(''),
       narrativeSec: new FormControl('', [Validators.required]),
     });

@@ -89,22 +89,20 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">Occurrence Date</ion-label>
-                  <ion-datetime
-                    placeholder="Month day, year"
+                  <ion-input
                     formControlName="occurrenceDate"
                     maxlength = ""
-                  ></ion-datetime>
+                    type="date"
+                  ></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">Occurrence Times</ion-label>
-                  <ion-datetime
-                  display-format="h:mm A" 
-                  picker-format="h:mm A" 
-                  placeholder="x:xx xx"
+                  <ion-input
+                  type="time"                  
                   formControlName="occurrenceTime"
-                  ></ion-datetime>
+                  ></ion-input>
                 </ion-item>
               </ion-col>
               
