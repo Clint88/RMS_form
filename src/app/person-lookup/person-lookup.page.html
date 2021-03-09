@@ -28,12 +28,7 @@
               <ion-label>Create new Person</ion-label>
             </ion-item>
           </ion-card>
-          <ion-card>
-            <ion-item [routerLink]="'/person-append'" class="ion-activated">
-              <ion-icon name="people-outline"></ion-icon>
-              <ion-label>Update Person</ion-label>
-            </ion-item>
-          </ion-card>
+          
         </ion-row>
 
         <!-- Searchbar -->
@@ -74,6 +69,17 @@
             >
               View More
             </ion-button>
+            <ion-col>
+              <ion-button 
+              expand="fit"
+              fill="outline"
+              shape="round"
+              color="secondary"
+              (click)="openAppendModal(person)"
+            >
+              Update Person
+            </ion-button>
+            </ion-col>
           </ion-card-content>
         </ion-card>
       </ion-col>
