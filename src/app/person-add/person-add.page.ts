@@ -23,7 +23,6 @@ import { Person } from '../models/person.model';
 })
 export class PersonAddPage implements OnInit {
   // Global Variables
-  personAdd: boolean = false;
   personForm: FormGroup;
   status = { isModal: false };
 
@@ -46,9 +45,7 @@ export class PersonAddPage implements OnInit {
     // Makes sure that the "valid" property on the form is set to "VALID",
     // if it's not (meaning a required field was not filled in), it alerts the user and doesn't add the doc
     if (this.personForm.status === 'VALID') {
-      if (this.status.isModal) {
-        await this.addpersonForm(this.status.isModal);
-      }
+      await this.addpersonForm();
     } else {
       // alerts the user when not all the form fields are filled in
       console.error('All required fields were not filled out');
@@ -56,20 +53,11 @@ export class PersonAddPage implements OnInit {
     }
   }
 
-  async personBtn() {
-    const modal = await this.modalController.create({
-      component: PersonAddPage,
-      cssClass: 'modal-styles',
-    });
-    return await modal.present();
-  }
-
-  async addpersonForm(isModal?: boolean) {
+  async addpersonForm() {
     // Adds the visit info collected in the form to a new document in firestore
     this.afs
       .collection('persons')
       .add({
-        // Injected Properties
         // Form Data
         code: this.personForm.controls.code.value,
         firstN: this.personForm.controls.firstN.value,
@@ -94,7 +82,7 @@ export class PersonAddPage implements OnInit {
         marks: this.personForm.controls.marks.value,
         tattoos: this.personForm.controls.tattoos.value,
         phone: this.personForm.controls.phone.value,
-        hazard: this.personForm.controls.hazard.value
+        hazard: this.personForm.controls.hazard.value,
       })
       // Any actions which must be done to the document that require info about the document go here
       .then(async (docRef) => {
@@ -105,6 +93,9 @@ export class PersonAddPage implements OnInit {
           },
           { merge: true }
         );
+        if (this.status.isModal) {
+          this.close(docRef.id);
+        }
       });
 
     this.personForm.reset(this.personForm);
@@ -112,11 +103,13 @@ export class PersonAddPage implements OnInit {
     this.personForm.markAsPristine;
 
     console.info('Form saved!');
-    this.successAlert();
+    if (!this.status.isModal) {
+      this.successAlert();
+    }
   }
 
   // Closes the modal
-  modalClose(docId?: string): void {
+  close(docId?: string): void {
     if (docId) {
       this.modalController.dismiss(docId);
     } else {
@@ -184,7 +177,7 @@ export class PersonAddPage implements OnInit {
       scars: new FormControl(''),
       marks: new FormControl(''),
       tattoos: new FormControl(''),
-      hazard: new FormControl('')
+      hazard: new FormControl(''),
     });
   }
 }

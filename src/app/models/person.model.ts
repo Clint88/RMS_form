@@ -12,7 +12,6 @@ export interface Person {
   ssn: number;
   dln: string;
   dlnExp: string;
-  sex: string;
   height: number;
   weight: number;
   age: number;

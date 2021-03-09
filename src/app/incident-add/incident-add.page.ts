@@ -217,6 +217,7 @@ export class IncidentAddPage implements OnInit {
           text: 'Yes',
           handler: () => {
             this.router.navigate(['/incident-add']);
+            location.reload();
           },
         },
         {

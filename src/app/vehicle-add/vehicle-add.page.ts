@@ -20,9 +20,6 @@ import {
 })
 export class VehicleAddPage implements OnInit {
   // Global Variables
-  incidentAdd: boolean = false;
-  vehicleAdd: boolean = false;
-  personAdd: boolean = false;
   vehicleForm: FormGroup;
   status = { isModal: false };
 
@@ -53,21 +50,11 @@ export class VehicleAddPage implements OnInit {
     }
   }
 
-  async vehicleBtn() {
-    const modal = await this.modalController.create({
-      component: VehicleAddPage,
-      cssClass: 'modal-styles',
-    });
-    return await modal.present();
-  }
-
   async addvehicleForm() {
     // Adds the visit info collected in the form to a new document in firestore
     this.afs
       .collection('vehicles')
       .add({
-        // Injected Properties
-
         // Form Data
         vin: this.vehicleForm.controls.vin.value,
         plate: this.vehicleForm.controls.plate.value,
