@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add a Vehicle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        (click)="close()"
+        fill="clear"
+        shape="round"
+        color="secondary"
+      >
+        <ion-label>Close</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="type.person; then person"></div>
+  <div *ngIf="type.vehicle; then vehicle"></div>
+  <div *ngIf="type.incident; then incident"></div>
+</ion-content>
+
+<ng-template #person>
+  <h1>Person Is Displaying!</h1>
+</ng-template>
+
+<ng-template #vehicle>
+  <h1>Vehicle Is Displaying!</h1>
+</ng-template>
+
+<ng-template #incident>
+  <h1>Incident Is Displaying!</h1>
+</ng-template>
