@@ -28,12 +28,7 @@
               <ion-label>Create new Vehicle</ion-label>
             </ion-item>
           </ion-card>
-          <ion-card>
-            <ion-item [routerLink]="'/vehicle-append'" class="ion-activated">
-              <ion-icon name="add-outline"></ion-icon>
-              <ion-label>Update Vehicle</ion-label>
-            </ion-item>
-          </ion-card>
+          
         </ion-row>
 
         <!-- Searchbar -->
@@ -72,6 +67,17 @@
             >
               View More
             </ion-button>
+            <ion-col>
+              <ion-button 
+              expand="fit"
+              fill="outline"
+              shape="round"
+              color="secondary"
+              (click)="openAppendModal(vehicle)"
+            >
+              Update Vehicle
+            </ion-button>
+            </ion-col>
           </ion-card-content>
         </ion-card>
       </ion-col>

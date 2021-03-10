@@ -155,7 +155,7 @@ export class PersonAddPage implements OnInit {
     this.personForm = this.formBuilder.group({
       code: new FormControl('', [Validators.required]),
       firstN: new FormControl('', [Validators.required]),
-      middleN: new FormControl('', [Validators.required]),
+      middleN: new FormControl(''),
       lastN: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
       city: new FormControl('', [Validators.required]),
