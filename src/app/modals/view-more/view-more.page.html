@@ -1,6 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Vehicle Info</ion-title>
+    <ion-title *ngIf="type.person">Person Info</ion-title>
+    <ion-title *ngIf="type.vehicle">Vehicle Info</ion-title>
+    <ion-title *ngIf="type.incident">Incident Info</ion-title>
     <ion-buttons slot="end">
       <ion-button
         (click)="close()"
@@ -22,8 +24,104 @@
 
 <!-- Person Template -->
 <ng-template #person>
-  <h1>Person Is Displaying!</h1>
-  <div *ngIf="data">{{data.firstN}}</div>
+  <h1 *ngIf="!data">Record not found</h1>
+  <h2 *ngIf="!data">Error: 06</h2>
+
+  <ion-list *ngIf="data">
+    <ion-item *ngIf="data.firstN || data.lastN">
+      <ion-label>
+        <h2>Full Name</h2>
+        <p *ngIf="data.middleN">
+          {{data.lastN}}, {{data.firstN}} {{data.middleN}}
+        </p>
+        <p *ngIf="!data.middleN">{{data.lastN}}, {{data.firstN}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.address">
+      <ion-label>
+        <h2>Address</h2>
+        <p>{{data.address}}, {{data.city}}, {{data.state}} {{data.zip}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.dob">
+      <ion-label>
+        <h2>Date of Birth</h2>
+        <p>{{data.dob}} (Age: {{data.age}})</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.phone">
+      <ion-label>
+        <h2>Phone Number</h2>
+        <p>{{data.phone}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.height">
+      <ion-label>
+        <h2>Height</h2>
+        <p>{{data.height}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.weight">
+      <ion-label>
+        <h2>Weight</h2>
+        <p>{{data.weight}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.hairColor">
+      <ion-label>
+        <h2>Hair Color</h2>
+        <p>{{data.hairColor}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.eyeColor">
+      <ion-label>
+        <h2>Eye Color</h2>
+        <p>{{data.eyeColor}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.race">
+      <ion-label>
+        <h2>Race</h2>
+        <p>{{data.race}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.scars != ''">
+      <ion-label>
+        <h2>Scars</h2>
+        <p>{{data.scars}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.marks != ''">
+      <ion-label>
+        <h2>Marks</h2>
+        <p>{{data.marks}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.tattoos != ''">
+      <ion-label>
+        <h2>Tattoos</h2>
+        <p>{{data.tattoos}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.sex">
+      <ion-label>
+        <h2>Sex</h2>
+        <p>{{data.sex}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.hazard != ''">
+      <ion-label>
+        <h2 color="warning">Hazardous</h2>
+        <p>{{data.hazard}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.gang != ''">
+      <ion-label>
+        <h2 color="warning">Gang Affiliated</h2>
+        <p>{{data.gang}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ng-template>
 
 <!-- Vehicle Template -->
@@ -72,7 +170,72 @@
   </ion-list>
 </ng-template>
 
+<!-- Incident Template -->
 <ng-template #incident>
-  <h1>Incident Is Displaying!</h1>
-  <div *ngIf="data">{{data.codeName}}</div>
+  <h1 *ngIf="!data">Record not found</h1>
+  <h2 *ngIf="!data">Error: 08</h2>
+
+  <ion-list *ngIf="data">
+    <ion-item *ngIf="data.code">
+      <ion-label>
+        <h2>Code</h2>
+        <p>{{data.code}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.location">
+      <ion-label>
+        <h2>Location</h2>
+        <p>{{data.location}} ( {{data.commonLocation}} )</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.officerName">
+      <ion-label>
+        <h2>Reporting Officer</h2>
+        <p>{{data.officerName}}</p>
+        <p>{{data.officerId}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.reportId">
+      <ion-label>
+        <h2>IR Serial</h2>
+        <p>{{data.reportId}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.domViolence != ''">
+      <ion-label>
+        <h2>Domestic Violence Event</h2>
+        <p>{{data.domViolence}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.narrative">
+      <ion-label>
+        <h2>Narrative</h2>
+        <p>{{data.narrative}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.persons">
+      <ion-label>
+        <h2>Associated Persons</h2>
+        <div *ngFor="let person of persons | async">
+          <p *ngIf="person.middleN">
+            {{person.lastN}}, {{person.firstN}} {{person.middleN}}
+          </p>
+          <p *ngIf="!person.middleN">{{person.lastN}}, {{person.firstN}}</p>
+        </div>
+        <p *ngIf="data.persons.length == 0">N/A</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="data.vehicles">
+      <ion-label>
+        <h2>Associated Vehicles</h2>
+        <div *ngFor="let vehicle of vehicles | async">
+          <p class="ion-margin-bottom">
+            {{vehicle.year}} {{vehicle.make}} {{vehicle.model}} &mdash;
+            {{vehicle.plate}}
+          </p>
+        </div>
+        <p *ngIf="data.vehicles.length == 0">N/A</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ng-template>
