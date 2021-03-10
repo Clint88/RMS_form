@@ -175,10 +175,10 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">DOB</ion-label>
-                  <ion-datetime
+                  <ion-input
                     formControlName="dob"
-                    displayFormat="MM/DD/YYYY"
-                  ></ion-datetime>
+                    type="date"
+                  ></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col>
@@ -190,7 +190,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">Drivers Lisence #</ion-label>
-                  <ion-input type="string" formControlName="dln"></ion-input>
+                  <ion-input type="string" maxlength="9" formControlName="dln"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>

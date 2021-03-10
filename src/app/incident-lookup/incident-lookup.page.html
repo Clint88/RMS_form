@@ -28,12 +28,7 @@
               <ion-label>Create new Incident</ion-label>
             </ion-item>
           </ion-card>
-          <ion-card>
-            <ion-item [routerLink]="'/incident-append'" class="ion-activated">
-              <ion-icon name="add-circle-outline"></ion-icon>
-              <ion-label>Update Incident</ion-label>
-            </ion-item>
-          </ion-card>
+          
         </ion-row>
 
         <!-- Searchbar -->
@@ -60,7 +55,8 @@
               <h4>Incident Type: {{ incident.codeName }}</h4>
             </ion-text>
             <br />
-            <ion-button
+            <ion-col>
+              <ion-button
               expand="fit"
               fill="outline"
               shape="round"
@@ -69,6 +65,20 @@
             >
               View More
             </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button 
+              expand="fit"
+              fill="outline"
+              shape="round"
+              color="secondary"
+              (click)="openAppendModal(incident)"
+              >
+                Update Incident
+              </ion-button>
+            </ion-col>
+
+            
           </ion-card-content>
         </ion-card>
       </ion-col>
