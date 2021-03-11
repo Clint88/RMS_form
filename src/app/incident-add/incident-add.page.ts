@@ -23,6 +23,7 @@ import { PersonService } from '../services/person.service';
 
 // Models
 import { Incident } from '../models/incident.model';
+import { AppendReportPage } from '../modals/append-report/append-report.page';
 
 @Component({
   selector: 'app-incident-add',
@@ -86,11 +87,49 @@ export class IncidentAddPage implements OnInit {
 
     return await modal.present();
   }
+  async existingPersonBtn() {
+    const type = { person: true, vehicle: false };
+    const modal = await this.modalController.create({
+      component: AppendReportPage,
+      componentProps: { type: type },
+      cssClass: 'modal-styles',
+    });
+
+    modal.onDidDismiss().then(async (data) => {
+      const personId = data['data'];
+      // Check to make sure an non-undefined value was passed back
+      if (personId) {
+        await this.persons.push(personId); // Here's your person
+        await this.personService.setLinkedPersons(this.persons);
+      }
+    });
+
+    return await modal.present();
+  }
   async vehicleBtn() {
     const status = { isModal: true };
     const modal = await this.modalController.create({
       component: VehicleAddPage,
       componentProps: { status: status },
+      cssClass: 'modal-styles',
+    });
+
+    modal.onDidDismiss().then(async (data) => {
+      const vehicleId = data['data'];
+      // Check to make sure an non-undefined value was passed back
+      if (vehicleId) {
+        await this.vehicles.push(vehicleId); // Here's your vehicle
+        await this.vehicleService.setLinkedVehicles(this.vehicles);
+      }
+    });
+
+    return await modal.present();
+  }
+  async existingVehicleBtn() {
+    const type = { person: false, vehicle: true };
+    const modal = await this.modalController.create({
+      component: AppendReportPage,
+      componentProps: { type: type },
       cssClass: 'modal-styles',
     });
 
@@ -243,5 +282,10 @@ export class IncidentAddPage implements OnInit {
       domViolence: new FormControl(''),
       narrativeSec: new FormControl('', [Validators.required]),
     });
+    // Clear linked form cache
+    this.persons = [];
+    await this.personService.setLinkedPersons(['']);
+    this.vehicles = [];
+    await this.vehicleService.setLinkedVehicles(['']);
   }
 }

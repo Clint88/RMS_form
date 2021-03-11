@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title *ngIf="type.person">Person Info</ion-title>
-    <ion-title *ngIf="type.vehicle">Vehicle Info</ion-title>
-    <ion-title *ngIf="type.incident">Incident Info</ion-title>
+    <ion-title *ngIf="type.person">Attach Person</ion-title>
+    <ion-title *ngIf="type.vehicle">Attach Vehicle</ion-title>
     <ion-buttons slot="end">
       <ion-button
         (click)="close()"
@@ -19,23 +18,81 @@
 <ion-content>
   <div *ngIf="type.person; then person"></div>
   <div *ngIf="type.vehicle; then vehicle"></div>
-  <div *ngIf="type.incident; then incident"></div>
 </ion-content>
 
 <!-- Person Template -->
 <ng-template #person>
-  <h1 *ngIf="!data">Record not found</h1>
-  <h2 *ngIf="!data">Error: 01</h2>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col *ngFor="let person of persons | async" class="ion-text-nowrap">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle color="tertiary">
+              {{ person.class }}
+            </ion-card-subtitle>
+            <ion-card-title>
+              {{ person.lastN }}, {{ person.firstN }} {{ person.middleN }}
+              &mdash; Age {{ person.age }}
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-text color="primary">
+              <h2><a href="tel:{{ person.phone }}">{{ person.phone }}</a></h2>
+            </ion-text>
+            <ion-text color="secondary">
+              <h2>{{ person.commonAddress }}</h2>
+              <h2>{{ person.address }}</h2>
+            </ion-text>
+            <br />
+            <ion-button
+              expand="fit"
+              fill="outline"
+              shape="round"
+              color="secondary"
+              (click)="close(person.uid)"
+            >
+              Attach Report
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ng-template>
 
 <!-- Vehicle Template -->
 <ng-template #vehicle>
-  <h1 *ngIf="!data">Record not found</h1>
-  <h2 *ngIf="!data">Error: 02</h2>
-</ng-template>
+  <ion-row class="ion-justify-content-center">
+    <ion-col *ngFor="let vehicle of vehicles | async" class="ion-text-nowrap">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle color="tertiary">
+            VIN: {{ vehicle.vin }}
+          </ion-card-subtitle>
+          <ion-card-title>
+            {{ vehicle.make }} {{ vehicle.model }} &mdash; {{ vehicle.year }}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-text color="primary">
+            <h3>Plate:</h3>
+          </ion-text>
+          <ion-text color="secondary">
+            <h1>{{ vehicle.plateState }}&mdash; {{ vehicle.plate }}</h1>
+          </ion-text>
 
-<!-- Incident Template -->
-<ng-template #incident>
-  <h1 *ngIf="!data">Record not found</h1>
-  <h2 *ngIf="!data">Error: 03</h2>
+          <br />
+          <ion-button
+            expand="fit"
+            fill="outline"
+            shape="round"
+            color="secondary"
+            (click)="close(vehicle.uid)"
+          >
+            Attach Report
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 </ng-template>

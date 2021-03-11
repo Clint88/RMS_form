@@ -14,6 +14,7 @@ import { ViewMorePage } from '../modals/view-more/view-more.page';
 
 // Searchbar
 import algoliasearch from 'algoliasearch';
+import { VehicleAppendPage } from '../vehicle-append/vehicle-append.page';
 
 @Component({
   selector: 'app-vehicle-lookup',
@@ -59,6 +60,24 @@ export class VehicleLookupPage implements OnInit {
       componentProps: {
         type: type,
         data: data,
+      },
+      cssClass: 'modal-styles',
+    });
+
+    return await modal.present();
+  }
+
+  async openAppendModal(data) {
+    const type = {
+      person: false,
+      vehicle: true,
+      incident: false,
+    };
+    const modal = await this.modalController.create({
+      component: VehicleAppendPage,
+      componentProps: {
+        source: '/vehicle-lookup',
+        data: type,
       },
       cssClass: 'modal-styles',
     });
