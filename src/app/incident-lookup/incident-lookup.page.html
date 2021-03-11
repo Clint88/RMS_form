@@ -13,7 +13,7 @@
     <ion-row class="ion-justify-content-center">
       <ion-text>
         <ion-card-header>
-          <ion-card-title>Incidence</ion-card-title>
+          <ion-card-title color="primary">Incidents</ion-card-title>
         </ion-card-header>
       </ion-text>
     </ion-row>
@@ -28,19 +28,60 @@
               <ion-label>Create new Incident</ion-label>
             </ion-item>
           </ion-card>
-          <ion-card>
-            <ion-item [routerLink]="'/incident-append'" class="ion-activated">
-              <ion-icon name="add-circle-outline"></ion-icon>
-              <ion-label>Update Incident</ion-label>
-            </ion-item>
-          </ion-card>
         </ion-row>
 
         <!-- Searchbar -->
         <ion-row class="ion-justify-content-center">
-          <ion-searchbar showCancelButton="focus"></ion-searchbar>
+          <ion-searchbar
+            (ionChange)="onSearchChange($event)"
+            showCancelButton="focus"
+          ></ion-searchbar>
         </ion-row>
       </ion-card>
+    </ion-row>
+    <!-- Firestore Output -->
+    <ion-row class="ion-justify-content-center">
+      <ion-col
+        *ngFor="let incident of incidents | async"
+        class="ion-text-nowrap"
+      >
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle color="tertiary">
+              Officer: {{ incident.officerName }}
+            </ion-card-subtitle>
+            <ion-card-title>{{ incident.reportId }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-text color="primary">
+              <h4>Incident Type: {{ incident.codeName }}</h4>
+            </ion-text>
+            <br />
+            <ion-col>
+              <ion-button
+                expand="fit"
+                fill="outline"
+                shape="round"
+                color="secondary"
+                (click)="openInfoModal(incident)"
+              >
+                View More
+              </ion-button>
+            </ion-col>
+            <!-- <ion-col>
+              <ion-button
+                expand="fit"
+                fill="outline"
+                shape="round"
+                color="secondary"
+                (click)="openAppendModal(incident.uid)"
+              >
+                Update Incident
+              </ion-button>
+            </ion-col> -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

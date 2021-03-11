@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -8,13 +8,15 @@ import { VehicleAppendPageRoutingModule } from './vehicle-append-routing.module'
 
 import { VehicleAppendPage } from './vehicle-append.page';
 
+import { UpdateVehicleDirective } from '../directives/update-vehicle.directive';
+
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     IonicModule,
-    VehicleAppendPageRoutingModule
+    VehicleAppendPageRoutingModule,
   ],
-  declarations: [VehicleAppendPage]
+  declarations: [VehicleAppendPage, UpdateVehicleDirective],
 })
 export class VehicleAppendPageModule {}

@@ -1,9 +1,124 @@
-<ion-header>
+<ion-header *ngIf="this.status.isModal">
   <ion-toolbar>
-    <ion-title>vehicle-add</ion-title>
+    <ion-title>Add a Vehicle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        (click)="close()"
+        fill="clear"
+        shape="round"
+        color="secondary"
+      >
+        <ion-label>Close</ion-label>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <ion-grid>
+    <!-- Logo and the title -->
+    <ion-row class="ion-justify-content-center" *ngIf="!this.status.isModal">
+      <img
+        src="assets/policeLogo.jpg"
+        alt="logo"
+        width="9%"
+        height="9%"
+        [routerLink]="'/home'"
+      />
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-text>
+        <ion-card-header>
+          <ion-card-title color="primary">Vehicle Report Form</ion-card-title>
+        </ion-card-header>
+      </ion-text>
+    </ion-row>
 
+    <!-- Form -->
+    <ion-row class="ion-justify-content-center">
+      <ion-card>
+        <ion-item>
+          <form [formGroup]="vehicleForm" (submit)="submitForm()">
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Vin#</ion-label>
+                  <ion-input placeholder="" formControlName="vin"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">License</ion-label>
+                  <ion-input maxlength="7" formControlName="plate"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">State</ion-label>
+                  <ion-input
+                    placeholder=""
+                    formControlName="plateState"
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Year</ion-label>
+                  <ion-datetime display-format="YYYY"  picker-format="YYYY" placeholder="YYYY" formControlName="year"></ion-datetime>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Make</ion-label>
+                  <ion-input placeholder="" formControlName="make"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Model</ion-label>
+                  <ion-input placeholder="" formControlName="model"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Style</ion-label>
+                  <ion-input placeholder="" formControlName="style"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Speed</ion-label>
+                  <ion-input type="number" formControlName="speed"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Color</ion-label>
+                  <ion-input placeholder="" formControlName="color"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <!-- Submit button -->
+            <ion-row class="ion-justify-content-center">
+              <ion-button
+                expand="block"
+                type="submit"
+                fill="outline"
+                shape="round"
+                color="secondary"
+                class="ion-margin-vertical"
+                >Submit</ion-button
+              >
+            </ion-row>
+          </form>
+        </ion-item>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
 </ion-content>

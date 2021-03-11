@@ -13,7 +13,7 @@
     <ion-row class="ion-justify-content-center">
       <ion-text>
         <ion-card-header>
-          <ion-card-title>Vehicle</ion-card-title>
+          <ion-card-title color="primary">Vehicle</ion-card-title>
         </ion-card-header>
       </ion-text>
     </ion-row>
@@ -23,24 +23,64 @@
       <ion-card>
         <ion-row>
           <ion-card>
-            <ion-item href="#" class="ion-activated">
+            <ion-item [routerLink]="'/vehicle-add'" class="ion-activated">
               <ion-icon name="add-outline"></ion-icon>
               <ion-label>Create new Vehicle</ion-label>
-            </ion-item>
-          </ion-card>
-          <ion-card>
-            <ion-item href="#" class="ion-activated">
-              <ion-icon name="add-outline"></ion-icon>
-              <ion-label>Update Vehicle</ion-label>
             </ion-item>
           </ion-card>
         </ion-row>
 
         <!-- Searchbar -->
         <ion-row class="ion-justify-content-center">
-          <ion-searchbar showCancelButton="focus"></ion-searchbar>
+          <ion-searchbar
+            (ionChange)="onSearchChange($event)"
+            showCancelButton="focus"
+          ></ion-searchbar>
         </ion-row>
       </ion-card>
+    </ion-row>
+    <!-- Firestore Output -->
+    <ion-row class="ion-justify-content-center">
+      <ion-col *ngFor="let vehicle of vehicles | async" class="ion-text-nowrap">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle color="tertiary">
+              VIN: {{ vehicle.vin }}
+            </ion-card-subtitle>
+            <ion-card-title>
+              {{ vehicle.make }} {{ vehicle.model }} &mdash; {{ vehicle.year }}
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-text color="primary">
+              <h3>Plate:</h3>
+            </ion-text>
+            <ion-text color="secondary">
+              <h1>{{ vehicle.plateState }}&mdash; {{ vehicle.plate }}</h1>
+            </ion-text>
+
+            <br />
+            <ion-button
+              expand="fit"
+              fill="outline"
+              shape="round"
+              color="secondary"
+              (click)="openInfoModal(vehicle)"
+            >
+              View More
+            </ion-button>
+            <ion-button
+              expand="fit"
+              fill="outline"
+              shape="round"
+              color="secondary"
+              (click)="openAppendModal(vehicle.uid)"
+            >
+              Update Vehicle
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

@@ -1,9 +1,254 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>incident-append</ion-title>
+    <ion-title>Update Incident Info</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        (click)="close()"
+        fill="clear"
+        shape="round"
+        color="secondary"
+      >
+        <ion-label>Close</ion-label>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <form
+        [formGroup]="incidentForm"
+        appUpdateIncident
+        path="{{ docPath }}"
+        (stateChange)="changeHandler($event)"
+        (ngSubmit)="close()"
+      >
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Incident Type</ion-label>
 
+              <ion-select interface="popover" formControlName="incidentType">
+                <ion-select-option value="robberyA"
+                  >Robbery (armed)</ion-select-option
+                >
+                <ion-select-option value="robberyU"
+                  >Robbery (unarmed)</ion-select-option
+                >
+                <ion-select-option value="threat">Threat</ion-select-option>
+                <ion-select-option value="drugs">Drugs</ion-select-option>
+                <ion-select-option value="assult">Assult</ion-select-option>
+                <ion-select-option value="weaponsViolations">
+                  Weapons Violations
+                </ion-select-option>
+                <ion-select-option value="Rape">Rape</ion-select-option>
+                <ion-select-option value="Fraud">Fraud</ion-select-option>
+                <ion-select-option value="drunkDriver"
+                  >Drunk Driver</ion-select-option
+                >
+                <ion-select-option value="subjectDisturbing">
+                  Subject Disturbing
+                </ion-select-option>
+                <ion-select-option value="criminal Damage">
+                  Criminal Damage
+                </ion-select-option>
+                <ion-select-option value="violationCO">
+                  Violation of Court Order
+                </ion-select-option>
+                <ion-select-option value="Trespassing"
+                  >Trespassing</ion-select-option
+                >
+                <ion-select-option value="Homicide">Homicide</ion-select-option>
+                <ion-select-option value="Burglary">Burglary</ion-select-option>
+                <ion-select-option value="Theft">Theft</ion-select-option>
+                <ion-select-option value="Missing Person">
+                  Missing Person
+                </ion-select-option>
+                <ion-select-option value="suspicious">
+                  Suspicious person/activity
+                </ion-select-option>
+                <ion-select-option value="deadBody"
+                  >Dead Body</ion-select-option
+                >
+                <ion-select-option value="insanePerson">
+                  Insane person
+                </ion-select-option>
+                <ion-select-option value="Collision"
+                  >Collision</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Occurrence Date</ion-label>
+              <ion-input
+                formControlName="occurrenceDate"
+                maxlength=""
+                type="date"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Occurrence Times</ion-label>
+              <ion-input
+                type="time"
+                formControlName="occurrenceTime"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-input *ngIf="robbery">Test</ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Officer Name</ion-label>
+              <ion-input
+                placeholder="Last, First"
+                formControlName="officerName"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Location</ion-label>
+              <ion-input
+                placeholder="11111 n 1st ln, city"
+                formControlName="location"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Location Name</ion-label>
+              <ion-input
+                placeholder="Name"
+                formControlName="locationName"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Narrative Section</ion-label>
+              <ion-textarea
+                placeholder="placeholder"
+                formControlName="narrativeSec"
+              >
+              </ion-textarea>
+            </ion-item>
+          </ion-col>
+          <ion-col class="ion-align-self-end">
+            <ion-item>
+              <ion-label position="stacked">DV Domestic Violence</ion-label>
+              <ion-checkbox formControlName="domViolence"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- templates -->
+
+        <!-- Add extra incident -->
+        <div *ngIf="incidentAdd; then add"></div>
+
+        <!-- add more forms -->
+        <ion-row class="ion-justify-content-center">
+          <ion-row>
+            <ion-col>
+              <ion-button
+                (click)="personBtn()"
+                expand="block"
+                fill="outline"
+                shape="round"
+                color="tertiary"
+                class="ion-margin-bottom"
+              >
+                <ion-icon name="person-add-outline" slot="start"></ion-icon>
+                Attach New Person
+              </ion-button>
+              <ion-button
+                (click)="existingPersonBtn()"
+                expand="block"
+                fill="outline"
+                shape="round"
+                color="tertiary"
+              >
+                <ion-icon name="person-add-outline" slot="start"></ion-icon>
+                Attach Existing Person
+              </ion-button>
+              <ion-text *ngIf="persons.length >= 1" color="primary">
+                <h3>Attached Persons</h3>
+              </ion-text>
+              <div *ngFor="let person of appendPersons | async">
+                <ion-text color="secondary">
+                  {{ person.lastN }}, {{ person.firstN }} {{ person.middleN }}
+                </ion-text>
+                <br />
+                <ion-text color="tertiary">
+                  {{ person.city }}, {{ person.state }} {{ person.zip }}
+                </ion-text>
+              </div>
+            </ion-col>
+            <ion-col>
+              <ion-button
+                (click)="vehicleBtn()"
+                expand="block"
+                fill="outline"
+                shape="round"
+                color="tertiary"
+                class="ion-margin-bottom"
+              >
+                <ion-icon name="car-sport-outline" slot="start"> </ion-icon>
+                Attach New Vehicle
+              </ion-button>
+              <ion-button
+                (click)="existingVehicleBtn()"
+                expand="block"
+                fill="outline"
+                shape="round"
+                color="tertiary"
+              >
+                <ion-icon name="car-sport-outline" slot="start"> </ion-icon>
+                Attach Existing Vehicle
+              </ion-button>
+              <ion-text *ngIf="vehicles.length >= 1" color="primary">
+                <h3>Attached Vehicles</h3>
+              </ion-text>
+              <div *ngFor="let vehicle of appendVehicles | async">
+                <ion-text color="tertiary">
+                  {{ vehicle.make }}&mdash; {{ vehicle.model }}
+                </ion-text>
+                <br />
+                <ion-text color="secondary">
+                  {{ vehicle.plate }}&mdash; {{ vehicle.plateState }}
+                </ion-text>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-row>
+
+        <!-- Submit button -->
+        <ion-row class="ion-justify-content-center">
+          <ion-button
+            expand="block"
+            type="submit"
+            fill="outline"
+            shape="round"
+            color="secondary"
+            class="ion-margin-vertical"
+          >
+            Submit
+          </ion-button>
+        </ion-row>
+      </form>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -8,13 +8,15 @@ import { PersonAppendPageRoutingModule } from './person-append-routing.module';
 
 import { PersonAppendPage } from './person-append.page';
 
+import { UpdatePersonDirective } from '../directives/update-person.directive';
+
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     IonicModule,
-    PersonAppendPageRoutingModule
+    PersonAppendPageRoutingModule,
   ],
-  declarations: [PersonAppendPage]
+  declarations: [PersonAppendPage, UpdatePersonDirective],
 })
 export class PersonAppendPageModule {}

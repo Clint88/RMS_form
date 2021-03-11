@@ -13,8 +13,8 @@ import { IncidentAddPage } from './incident-add.page';
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
-    IncidentAddPageRoutingModule
+    IncidentAddPageRoutingModule,
   ],
-  declarations: [IncidentAddPage]
+  declarations: [IncidentAddPage],
 })
 export class IncidentAddPageModule {}

@@ -10,8 +10,5 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  // signedin = true;
-
   constructor(public auth: AuthService) {}
-  signIn = this.auth.googleSignin();
 }

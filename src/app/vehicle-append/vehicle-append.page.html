@@ -1,9 +1,124 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>vehicle-append</ion-title>
+    <ion-title>Update Vehicle Info</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        (click)="close()"
+        fill="clear"
+        shape="round"
+        color="secondary"
+      >
+        <ion-label>Close</ion-label>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <form
+        [formGroup]="vehicleForm"
+        id="vehicleForm"
+        appUpdateVehicle
+        path="{{ docPath }}"
+        (stateChange)="changeHandler($event)"
+        (ngSubmit)="close()"
+      >
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Vin#</ion-label>
+              <ion-input
+                placeholder=""
+                formControlName="vin"
+                id="vin"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">License</ion-label>
+              <ion-input
+                maxlength="7"
+                formControlName="plate"
+                id="plate"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">State</ion-label>
+              <ion-input
+                placeholder=""
+                formControlName="plateState"
+                id="plateState"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Year</ion-label>
+              <ion-datetime
+                display-format="YYYY"
+                picker-format="YYYY"
+                placeholder="YYYY"
+                formControlName="year"
+                id="year"
+              ></ion-datetime>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Make</ion-label>
+              <ion-input
+                placeholder=""
+                formControlName="make"
+                id="make"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Model</ion-label>
+              <ion-input
+                placeholder=""
+                formControlName="model"
+                id="model"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Color</ion-label>
+              <ion-input
+                placeholder=""
+                formControlName="color"
+                id="color"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Submit button -->
+        <ion-row class="ion-justify-content-center">
+          <ion-button
+            expand="block"
+            type="submit"
+            fill="outline"
+            shape="round"
+            color="secondary"
+            class="ion-margin-vertical"
+            id="confirm"
+            >Submit</ion-button
+          >
+        </ion-row>
+      </form>
+    </ion-row>
+  </ion-grid>
 </ion-content>
