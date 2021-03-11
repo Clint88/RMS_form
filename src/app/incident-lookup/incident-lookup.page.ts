@@ -16,6 +16,7 @@ import { ModalController } from '@ionic/angular';
 
 // Searchbar
 import algoliasearch from 'algoliasearch';
+import { IncidentAppendPage } from '../incident-append/incident-append.page';
 
 @Component({
   selector: 'app-incident-lookup',
@@ -73,6 +74,18 @@ export class IncidentLookupPage implements OnInit {
       componentProps: {
         type: type,
         data: data,
+      },
+      cssClass: 'modal-styles',
+    });
+
+    return await modal.present();
+  }
+
+  async openAppendModal(docId) {
+    const modal = await this.modalController.create({
+      component: IncidentAppendPage,
+      componentProps: {
+        docId: docId,
       },
       cssClass: 'modal-styles',
     });

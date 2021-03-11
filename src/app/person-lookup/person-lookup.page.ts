@@ -14,6 +14,7 @@ import { ModalController } from '@ionic/angular';
 
 // Searchbar
 import algoliasearch from 'algoliasearch';
+import { PersonAppendPage } from '../person-append/person-append.page';
 
 @Component({
   selector: 'app-person-lookup',
@@ -66,17 +67,11 @@ export class PersonLookupPage implements OnInit {
     return await modal.present();
   }
 
-  async openAppendModal(data) {
-    const type = {
-      person: true,
-      vehicle: false,
-      incident: false,
-    };
+  async openAppendModal(docId) {
     const modal = await this.modalController.create({
-      component: ViewMorePage,
+      component: PersonAppendPage,
       componentProps: {
-        type: type,
-        data: data,
+        docId: docId,
       },
       cssClass: 'modal-styles',
     });

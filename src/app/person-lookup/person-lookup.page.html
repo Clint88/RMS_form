@@ -28,12 +28,14 @@
               <ion-label>Create new Person</ion-label>
             </ion-item>
           </ion-card>
-          
         </ion-row>
 
         <!-- Searchbar -->
         <ion-row class="ion-justify-content-center">
-          <ion-searchbar (ionChange)="onSearchChange($event)" showCancelButton="focus"></ion-searchbar>
+          <ion-searchbar
+            (ionChange)="onSearchChange($event)"
+            showCancelButton="focus"
+          ></ion-searchbar>
         </ion-row>
       </ion-card>
     </ion-row>
@@ -70,15 +72,15 @@
               View More
             </ion-button>
             <ion-col>
-              <ion-button 
-              expand="fit"
-              fill="outline"
-              shape="round"
-              color="secondary"
-              (click)="openAppendModal(person)"
-            >
-              Update Person
-            </ion-button>
+              <ion-button
+                expand="fit"
+                fill="outline"
+                shape="round"
+                color="secondary"
+                (click)="openAppendModal(person.uid)"
+              >
+                Update Person
+              </ion-button>
             </ion-col>
           </ion-card-content>
         </ion-card>

@@ -28,12 +28,14 @@
               <ion-label>Create new Incident</ion-label>
             </ion-item>
           </ion-card>
-          
         </ion-row>
 
         <!-- Searchbar -->
         <ion-row class="ion-justify-content-center">
-          <ion-searchbar (ionChange)="onSearchChange($event)" showCancelButton="focus"></ion-searchbar>
+          <ion-searchbar
+            (ionChange)="onSearchChange($event)"
+            showCancelButton="focus"
+          ></ion-searchbar>
         </ion-row>
       </ion-card>
     </ion-row>
@@ -57,28 +59,26 @@
             <br />
             <ion-col>
               <ion-button
-              expand="fit"
-              fill="outline"
-              shape="round"
-              color="secondary"
-              (click)="openInfoModal(incident)"
-            >
-              View More
-            </ion-button>
+                expand="fit"
+                fill="outline"
+                shape="round"
+                color="secondary"
+                (click)="openInfoModal(incident)"
+              >
+                View More
+              </ion-button>
             </ion-col>
-            <ion-col>
-              <ion-button 
-              expand="fit"
-              fill="outline"
-              shape="round"
-              color="secondary"
-              (click)="openAppendModal(incident)"
+            <!-- <ion-col>
+              <ion-button
+                expand="fit"
+                fill="outline"
+                shape="round"
+                color="secondary"
+                (click)="openAppendModal(incident.uid)"
               >
                 Update Incident
               </ion-button>
-            </ion-col>
-
-            
+            </ion-col> -->
           </ion-card-content>
         </ion-card>
       </ion-col>

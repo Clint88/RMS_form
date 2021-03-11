@@ -1,9 +1,346 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>person-append</ion-title>
+    <ion-title>Update Person Info</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        (click)="close()"
+        fill="clear"
+        shape="round"
+        color="secondary"
+      >
+        <ion-label>Close</ion-label>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <form
+        [formGroup]="personForm"
+        appUpdatePerson
+        path="{{ docPath }}"
+        (stateChange)="changeHandler($event)"
+        (ngSubmit)="close()"
+      >
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label interface="popover">Code</ion-label>
+              <ion-select formControlName="code">
+                <ion-select-option value="0"
+                  >RP - Reporting Person</ion-select-option
+                >
+                <ion-select-option value="1">W - Witness</ion-select-option>
+                <ion-select-option value="2">V - Victim</ion-select-option>
+                <ion-select-option value="3"
+                  >IL - Investigative lead</ion-select-option
+                >
+                <ion-select-option value="5">S - Suspect</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">
+                First Name
+                <ion-input type="text" formControlName="firstN"></ion-input>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">
+                Middle Name
+                <ion-input type="text" formControlName="middleN"></ion-input>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">
+                Last Name
+                <ion-input type="text" formControlName="lastN"></ion-input>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">
+                Address
+                <ion-input type="text" formControlName="address"></ion-input>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">
+                City
+                <ion-input type="text" formControlName="city"></ion-input>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label interface="popover">State</ion-label>
+              <ion-select formControlName="state">
+                <ion-select-option value="AL">AL</ion-select-option>
+                <ion-select-option value="AK">AK</ion-select-option>
+                <ion-select-option value="AZ">AZ</ion-select-option>
+                <ion-select-option value="AR">AR</ion-select-option>
+                <ion-select-option value="CA">CA</ion-select-option>
+                <ion-select-option value="CO">CO</ion-select-option>
+                <ion-select-option value="CT">CT</ion-select-option>
+                <ion-select-option value="DE">DE</ion-select-option>
+                <ion-select-option value="FL">FL</ion-select-option>
+                <ion-select-option value="GA">GA</ion-select-option>
+                <ion-select-option value="HI">HI</ion-select-option>
+                <ion-select-option value="ID">ID</ion-select-option>
+                <ion-select-option value="IL">IL</ion-select-option>
+                <ion-select-option value="IN">IN</ion-select-option>
+                <ion-select-option value="IA">IA</ion-select-option>
+                <ion-select-option value="KS">KS</ion-select-option>
+                <ion-select-option value="KY">KY</ion-select-option>
+                <ion-select-option value="LA">LA</ion-select-option>
+                <ion-select-option value="ME">ME</ion-select-option>
+                <ion-select-option value="MD">MD</ion-select-option>
+                <ion-select-option value="MA">MA</ion-select-option>
+                <ion-select-option value="MI">MI</ion-select-option>
+                <ion-select-option value="MN">MN</ion-select-option>
+                <ion-select-option value="MS">MS</ion-select-option>
+                <ion-select-option value="MO">MO</ion-select-option>
+                <ion-select-option value="MT">MT</ion-select-option>
+                <ion-select-option value="NE">NE</ion-select-option>
+                <ion-select-option value="NV">NV</ion-select-option>
+                <ion-select-option value="NH">NH</ion-select-option>
+                <ion-select-option value="NJ">NJ</ion-select-option>
+                <ion-select-option value="NM">NM</ion-select-option>
+                <ion-select-option value="NY">NY</ion-select-option>
+                <ion-select-option value="NC">NC</ion-select-option>
+                <ion-select-option value="ND">ND</ion-select-option>
+                <ion-select-option value="OH">OH</ion-select-option>
+                <ion-select-option value="OK">OK</ion-select-option>
+                <ion-select-option value="OR">OR</ion-select-option>
+                <ion-select-option value="PA">PA</ion-select-option>
+                <ion-select-option value="PI">RI</ion-select-option>
+                <ion-select-option value="SC">SC</ion-select-option>
+                <ion-select-option value="SD">SD</ion-select-option>
+                <ion-select-option value="TN">TN</ion-select-option>
+                <ion-select-option value="TX">TX</ion-select-option>
+                <ion-select-option value="UT">UT</ion-select-option>
+                <ion-select-option value="VT">VT</ion-select-option>
+                <ion-select-option value="VA">VA</ion-select-option>
+                <ion-select-option value="WA">WA</ion-select-option>
+                <ion-select-option value="WV">WV</ion-select-option>
+                <ion-select-option value="WI">WI</ion-select-option>
+                <ion-select-option value="WY">WY</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">
+                Zip Code
+                <ion-input formControlName="zip" type="number"></ion-input>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">DOB</ion-label>
+              <ion-input formControlName="dob" type="date"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">SSN</ion-label>
+              <ion-input type="number" formControlName="ssn"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Drivers Lisence #</ion-label>
+              <ion-input
+                type="string"
+                maxlength="9"
+                formControlName="dln"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Height</ion-label>
+              <ion-input
+                type="number"
+                placeholder="XXX"
+                formControlName="height"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Weight</ion-label>
+              <ion-input
+                type="number"
+                placeholder="XXX"
+                formControlName="weight"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Age</ion-label>
+              <ion-input
+                type="number"
+                placeholder="XXX"
+                formControlName="age"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Phone #</ion-label>
+              <ion-input
+                type="number"
+                placeholder="(XXX)-XXX-XXXX"
+                formControlName="phone"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label interface="popover">Sex</ion-label>
+
+              <ion-select formControlName="sex">
+                <ion-select-option value="Male">M - Male</ion-select-option>
+                <ion-select-option value="Female">F - Female</ion-select-option>
+                <ion-select-option value="Unknown"
+                  >U - Unknown</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label interface="popover">Race</ion-label>
+
+              <ion-select formControlName="race">
+                <ion-select-option value="White">W - White</ion-select-option>
+                <ion-select-option value="Black">B - Black</ion-select-option>
+                <ion-select-option value="Hispanic"
+                  >H - Hispanic</ion-select-option
+                >
+                <ion-select-option value="Indian (Native American)"
+                  >I - Indian (Native American)</ion-select-option
+                >
+                <ion-select-option value="Asian">A - Asian</ion-select-option>
+                <ion-select-option value="Unknown"
+                  >U - Unknown</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label interface="popover">Eye Color</ion-label>
+
+              <ion-select formControlName="eyeColor">
+                <ion-select-option value="Black">BLK - Black</ion-select-option>
+                <ion-select-option value="Blue">BLU - Blue</ion-select-option>
+                <ion-select-option value="Brown">BRO - Brown</ion-select-option>
+                <ion-select-option value="Green">GRN - Green</ion-select-option>
+                <ion-select-option value="Hazel">HAZ - Hazel</ion-select-option>
+                <ion-select-option value="Gray">GRY - Gray</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label interface="popover">Hair Color</ion-label>
+
+              <ion-select formControlName="hairColor">
+                <ion-select-option value="Black">BLK - Black</ion-select-option>
+                <ion-select-option value="Blond">BLN - Blond</ion-select-option>
+                <ion-select-option value="Brown">BRO - Brown</ion-select-option>
+                <ion-select-option value="Green">GRN - Green</ion-select-option>
+                <ion-select-option value="Hazel">HAZ - Hazel</ion-select-option>
+                <ion-select-option value="Gray">GRY - Gray</ion-select-option>
+                <ion-select-option value="White">WHI - White</ion-select-option>
+                <ion-select-option value="Blue">BLU - Blue</ion-select-option>
+                <ion-select-option value="Red">RED - Red</ion-select-option>
+                <ion-select-option value="Bald">BLD - Bald</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Gang Affliation</ion-label>
+              <ion-checkbox formControlName="gang"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Scars</ion-label>
+              <ion-textarea
+                placeholder="Enter any Scars here..."
+                formControlName="scars"
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Marks</ion-label>
+              <ion-textarea
+                placeholder="Enter any Marks here..."
+                formControlName="marks"
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Tattoos</ion-label>
+              <ion-textarea
+                placeholder="Enter any Tattoos here..."
+                formControlName="tattoos"
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Hazard</ion-label>
+              <ion-textarea
+                placeholder="Enter any Hazard notes here..."
+                formControlName="hazard"
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Submit button -->
+        <ion-row class="ion-justify-content-center">
+          <ion-button
+            expand="block"
+            type="submit"
+            fill="outline"
+            shape="round"
+            color="secondary"
+            class="ion-margin-vertical"
+            >Submit</ion-button
+          >
+        </ion-row>
+      </form>
+    </ion-row>
+  </ion-grid>
 </ion-content>
