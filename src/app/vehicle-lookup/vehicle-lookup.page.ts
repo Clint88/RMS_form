@@ -30,14 +30,16 @@ export class VehicleLookupPage implements OnInit {
   constructor(
     private vehicleService: VehicleService,
     private modalController: ModalController
-  ) {this.searchConfig = algoliasearch(
-    'U05K5PJPG3',
-    '1532baaf40772552ff1fbd6f65364cb3'
-  );
-  this.vehicleIndex = this.searchConfig.initIndex('vehicle');
-  this.vehicleIndex.search(this.searchQuery).then((data) => {
-    this.vehicle = data.hits;
-  });}
+  ) {
+    this.searchConfig = algoliasearch(
+      'YCWVX2WB7E',
+      '8aa7153555fce678a6e3010f8b7a6eec'
+    );
+    this.vehicleIndex = this.searchConfig.initIndex('vehicles');
+    this.vehicleIndex.search(this.searchQuery).then((data) => {
+      this.vehicle = data.hits;
+    });
+  }
 
   async onSearchChange(event) {
     this.searchQuery = event.detail.value;

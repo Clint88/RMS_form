@@ -32,10 +32,10 @@ export class PersonLookupPage implements OnInit {
     private modalController: ModalController
   ) {
     this.searchConfig = algoliasearch(
-      'U05K5PJPG3',
-      '1532baaf40772552ff1fbd6f65364cb3'
+      'YCWVX2WB7E',
+      '8aa7153555fce678a6e3010f8b7a6eec'
     );
-    this.personsIndex = this.searchConfig.initIndex('person');
+    this.personsIndex = this.searchConfig.initIndex('persons');
     this.personsIndex.search(this.searchQuery).then((data) => {
       this.person = data.hits;
     });

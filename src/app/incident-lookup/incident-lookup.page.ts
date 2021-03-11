@@ -41,7 +41,7 @@ export class IncidentLookupPage implements OnInit {
       'YCWVX2WB7E',
       '8aa7153555fce678a6e3010f8b7a6eec'
     );
-    this.incidentIndex = this.searchConfig.initIndex('incident');
+    this.incidentIndex = this.searchConfig.initIndex('incidents');
     this.incidentIndex.search(this.searchQuery).then((data) => {
       this.incident = data.hits;
     });
@@ -49,14 +49,11 @@ export class IncidentLookupPage implements OnInit {
     this.personsIndex.search(this.searchQuery).then((data) => {
       this.persons = data.hits;
     });
-    this.vehicleIndex = this.searchConfig.initIndex('vehicle');
+    this.vehicleIndex = this.searchConfig.initIndex('vehicles');
     this.vehicleIndex.search(this.searchQuery).then((data) => {
       this.vehicle = data.hits;
     });
   }
-
-  
-  
 
   async onSearchChange(Event) {
     this.searchQuery = Event.detail.value;
@@ -64,7 +61,6 @@ export class IncidentLookupPage implements OnInit {
       this.persons = data.hits;
     });
   }
-
 
   async openInfoModal(data) {
     const type = {
