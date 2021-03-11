@@ -1,35 +1,45 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, ModalController, NavParams } from '@ionic/angular';
-
-// Models
-import { Vehicle } from 'src/app/models/vehicle.model';
-
-// Services
-import { VehicleService } from 'src/app/services/vehicle.service';
+import { ModalController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-vehicle-append',
   templateUrl: './vehicle-append.page.html',
   styleUrls: ['./vehicle-append.page.scss'],
-  providers: [NavParams],
+  providers: [NavParams, FormBuilder],
 })
 export class VehicleAppendPage implements OnInit {
-  data;
-  source;
+  // Global Variables
+  vehicleForm: FormGroup;
+  state: string;
+  docId;
+  docPath: string;
 
   constructor(
     private modalController: ModalController,
     private navParams: NavParams,
-    private alertController: AlertController,
+    public formBuilder: FormBuilder,
     private router: Router
   ) {
-    if (this.navParams.get('source')) {
-      this.source = this.navParams.get('source');
+    console.log(this.docId);
+    this.docId = this.navParams.get('docId');
+    console.log(this.docId);
+    if (this.navParams.get('docId')) {
+      this.docId = this.navParams.get('docId');
+      console.log(this.docId);
+      this.docPath = `vehicles/${this.docId}`;
     }
-    if (this.navParams.get('data')) {
-      this.data = this.navParams.get('data');
-    }
+  }
+
+  changeHandler(e) {
+    this.state = e;
+    console.log(this.state);
   }
 
   // Closes the modal
@@ -37,48 +47,23 @@ export class VehicleAppendPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  async openPrompt() {
-    console.log('made it');
-    const alert = await this.alertController.create({
-      header: 'Add a Report',
-      message: 'What kind of report would you like to add?',
-      buttons: [
-        {
-          text: 'Person',
-          handler: () => {
-            this.router.navigate(['/person-append']);
-          },
-        },
-        {
-          text: 'Vehicle',
-          handler: () => {
-            this.router.navigate(['/vehicle-append']);
-          },
-        },
-        {
-          text: 'Incident',
-          handler: () => {
-            this.router.navigate(['/incident-append']);
-          },
-        },
-        {
-          text: 'Cancel',
-          handler: () => {
-            this.close();
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
   ngOnInit() {
-    if (!this.data) {
+    if (!this.docId) {
       console.error('Error 05: Page was loaded without Modal Context');
       this.router.navigate(['/home']);
       return;
     }
-    this.openPrompt();
+    // Define reactive form structure
+    this.vehicleForm = this.formBuilder.group({
+      vin: new FormControl(''),
+      plate: new FormControl('', [Validators.required]),
+      plateState: new FormControl('', [Validators.required]),
+      year: new FormControl('', [Validators.required]),
+      make: new FormControl('', [Validators.required]),
+      model: new FormControl('', [Validators.required]),
+      style: new FormControl('', [Validators.required]),
+      speed: new FormControl(''),
+      color: new FormControl('', [Validators.required]),
+    });
   }
 }

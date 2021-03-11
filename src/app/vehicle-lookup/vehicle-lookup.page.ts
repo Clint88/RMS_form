@@ -67,17 +67,12 @@ export class VehicleLookupPage implements OnInit {
     return await modal.present();
   }
 
-  async openAppendModal(data) {
-    const type = {
-      person: false,
-      vehicle: true,
-      incident: false,
-    };
+  async openAppendModal(docId) {
+    console.log(docId);
     const modal = await this.modalController.create({
       component: VehicleAppendPage,
       componentProps: {
-        source: '/vehicle-lookup',
-        data: type,
+        docId: docId,
       },
       cssClass: 'modal-styles',
     });

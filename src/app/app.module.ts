@@ -13,9 +13,17 @@ import { AuthService } from './services/auth.service';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { UpdatePersonDirective } from './directives/update-person.directive';
+import { UpdateIncidentDirective } from './directives/update-incident.directive';
+import { UpdateVehicleDirective } from './directives/update-vehicle.directive';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    UpdateVehicleDirective,
+    UpdatePersonDirective,
+    UpdateIncidentDirective,
+  ],
   entryComponents: [],
   imports: [
     BrowserModule,
