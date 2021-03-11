@@ -81,7 +81,11 @@ const routes: Routes = [
       import('./modals/view-more/view-more.module').then(
         (m) => m.ViewMorePageModule
       ),
+  },  {
+    path: 'append-report',
+    loadChildren: () => import('./modals/append-report/append-report.module').then( m => m.AppendReportPageModule)
   },
+
 ];
 
 @NgModule({

@@ -43,5 +43,23 @@ export class PersonLookupPage implements OnInit {
     return await modal.present();
   }
 
+  async openAppendModal(data) {
+    const type = {
+      person: true,
+      vehicle: false,
+      incident: false,
+    };
+    const modal = await this.modalController.create({
+      component: ViewMorePage,
+      componentProps: {
+        type: type,
+        data: data,
+      },
+      cssClass: 'modal-styles',
+    });
+
+    return await modal.present();
+  }
+
   ngOnInit() {}
 }

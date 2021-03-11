@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="type.person">Person Info</ion-title>
+    <ion-title *ngIf="type.vehicle">Vehicle Info</ion-title>
+    <ion-title *ngIf="type.incident">Incident Info</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        (click)="close()"
+        fill="clear"
+        shape="round"
+        color="secondary"
+      >
+        <ion-label>Close</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="type.person; then person"></div>
+  <div *ngIf="type.vehicle; then vehicle"></div>
+  <div *ngIf="type.incident; then incident"></div>
+</ion-content>
+
+<!-- Person Template -->
+<ng-template #person>
+  <h1 *ngIf="!data">Record not found</h1>
+  <h2 *ngIf="!data">Error: 01</h2>
+</ng-template>
+
+<!-- Vehicle Template -->
+<ng-template #vehicle>
+  <h1 *ngIf="!data">Record not found</h1>
+  <h2 *ngIf="!data">Error: 02</h2>
+</ng-template>
+
+<!-- Incident Template -->
+<ng-template #incident>
+  <h1 *ngIf="!data">Record not found</h1>
+  <h2 *ngIf="!data">Error: 03</h2>
+</ng-template>
