@@ -39,8 +39,7 @@ export class UpdateVehicleDirective {
 
   async setDoc() {
     try {
-      await this.afs.collection(this.path).add(this.formGroup.value);
-
+      await this.docRef.set(this.formGroup.value, { merge: true });
       this.state = 'synced';
     } catch (err) {
       console.log(err);
@@ -75,7 +74,7 @@ export class UpdateVehicleDirective {
 
   getDocRef(path: string): any {
     if (path.split('/').length % 2) {
-      return this.afs.doc('${path}/${this.afs.createId()}');
+      return this.afs.doc(`${path}/${this.afs.createId()}`);
     } else {
       return this.afs.doc(path);
     }

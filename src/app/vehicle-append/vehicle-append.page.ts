@@ -27,13 +27,8 @@ export class VehicleAppendPage implements OnInit {
     public formBuilder: FormBuilder,
     private router: Router
   ) {
-    console.log(this.docId);
-    this.docId = this.navParams.get('docId');
-    console.log(this.docId);
     if (this.navParams.get('docId')) {
       this.docId = this.navParams.get('docId');
-      console.log(this.docId);
-      this.docPath = `vehicles/${this.docId}`;
     }
   }
 
@@ -53,6 +48,7 @@ export class VehicleAppendPage implements OnInit {
       this.router.navigate(['/home']);
       return;
     }
+    this.docPath = `vehicles/${this.docId}`;
     // Define reactive form structure
     this.vehicleForm = this.formBuilder.group({
       vin: new FormControl(''),
@@ -61,8 +57,6 @@ export class VehicleAppendPage implements OnInit {
       year: new FormControl('', [Validators.required]),
       make: new FormControl('', [Validators.required]),
       model: new FormControl('', [Validators.required]),
-      style: new FormControl('', [Validators.required]),
-      speed: new FormControl(''),
       color: new FormControl('', [Validators.required]),
     });
   }

@@ -14,10 +14,9 @@ import { UpdateVehicleDirective } from '../directives/update-vehicle.directive';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    UpdateVehicleDirective,
     IonicModule,
     VehicleAppendPageRoutingModule,
   ],
-  declarations: [VehicleAppendPage],
+  declarations: [VehicleAppendPage, UpdateVehicleDirective],
 })
 export class VehicleAppendPageModule {}

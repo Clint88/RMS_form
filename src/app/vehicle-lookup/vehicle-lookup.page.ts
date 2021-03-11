@@ -68,7 +68,6 @@ export class VehicleLookupPage implements OnInit {
   }
 
   async openAppendModal(docId) {
-    console.log(docId);
     const modal = await this.modalController.create({
       component: VehicleAppendPage,
       componentProps: {

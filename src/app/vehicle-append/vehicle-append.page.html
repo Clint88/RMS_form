@@ -21,7 +21,7 @@
         [formGroup]="vehicleForm"
         id="vehicleForm"
         appUpdateVehicle
-        path="{{'vehicles/' + docId}}"
+        path="{{ docPath }}"
         (stateChange)="changeHandler($event)"
         (submit)="close()"
       >
@@ -93,26 +93,6 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label position="stacked">Style</ion-label>
-              <ion-input
-                placeholder=""
-                formControlName="style"
-                id="style"
-              ></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label position="stacked">Speed</ion-label>
-              <ion-input
-                type="number"
-                formControlName="speed"
-                id="speed"
-              ></ion-input>
-            </ion-item>
-          </ion-col>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Color</ion-label>
