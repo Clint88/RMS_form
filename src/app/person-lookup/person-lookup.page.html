@@ -33,7 +33,7 @@
 
         <!-- Searchbar -->
         <ion-row class="ion-justify-content-center">
-          <ion-searchbar showCancelButton="focus"></ion-searchbar>
+          <ion-searchbar (ionChange)="onSearchChange($event)" showCancelButton="focus"></ion-searchbar>
         </ion-row>
       </ion-card>
     </ion-row>

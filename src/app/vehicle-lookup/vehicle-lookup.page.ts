@@ -12,6 +12,9 @@ import { ModalController } from '@ionic/angular';
 // Pages
 import { ViewMorePage } from '../modals/view-more/view-more.page';
 
+// Searchbar
+import algoliasearch from 'algoliasearch';
+
 @Component({
   selector: 'app-vehicle-lookup',
   templateUrl: './vehicle-lookup.page.html',
@@ -19,11 +22,29 @@ import { ViewMorePage } from '../modals/view-more/view-more.page';
 })
 export class VehicleLookupPage implements OnInit {
   vehicles: Observable<Vehicle[]> = this.vehicleService.vehicles$;
+  searchConfig;
+  vehicleIndex;
+  vehicle: Vehicle;
+  searchQuery: string = '';
 
   constructor(
     private vehicleService: VehicleService,
     private modalController: ModalController
-  ) {}
+  ) {this.searchConfig = algoliasearch(
+    'U05K5PJPG3',
+    '1532baaf40772552ff1fbd6f65364cb3'
+  );
+  this.vehicleIndex = this.searchConfig.initIndex('vehicle');
+  this.vehicleIndex.search(this.searchQuery).then((data) => {
+    this.vehicle = data.hits;
+  });}
+
+  async onSearchChange(event) {
+    this.searchQuery = event.detail.value;
+    this.vehicleIndex.search(this.searchQuery).then((data) => {
+      this.vehicle = data.hits;
+    });
+  }
 
   async openInfoModal(data) {
     const type = {
